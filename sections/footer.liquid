@@ -4,7 +4,6 @@
   assign shipping_url = shop.shipping_policy.url | default: '/policies/shipping-policy'
   assign terms_url = shop.terms_of_service.url | default: '/policies/terms-of-service'
   assign legal_name = settings.legal_business_name | default: 'ChaliseyZ Central L.L.C.'
-  assign support_email = settings.support_email | default: shop.email
 %}
 
 <footer class="site-footer">
@@ -28,7 +27,7 @@
       <h2>About BeardMate</h2>
       <p>{{ section.settings.description }}</p>
       <p class="footer-legal-entity">BeardMate is owned and operated by {{ legal_name }}.</p>
-      {% if support_email != blank %}<a href="mailto:{{ support_email }}">{{ support_email }}</a>{% endif %}
+      <a href="{{ pages.contact.url | default: '/pages/contact' }}">Contact customer care</a>
       {% if settings.support_phone != blank %}<a href="tel:{{ settings.support_phone | remove: ' ' | remove: '(' | remove: ')' | remove: '-' }}">{{ settings.support_phone }}</a>{% endif %}
       {% if settings.business_address != blank %}<address>{{ settings.business_address | newline_to_br }}</address>{% endif %}
     </div>

@@ -1,6 +1,5 @@
 {% liquid
   assign legal_name = settings.legal_business_name | default: 'ChaliseyZ Central L.L.C.'
-  assign support_email = settings.support_email | default: shop.email
   assign policy_title = 'Store policy'
   assign policy_body = blank
   assign policy_type = 'policy'
@@ -163,7 +162,7 @@
 
       <div class="policy-contact-card">
         <h2>Contact {{ legal_name }}</h2>
-        {% if support_email != blank %}<p>Email: <a href="mailto:{{ support_email }}">{{ support_email }}</a></p>{% endif %}
+        <p>Customer support is available through our secure contact form.</p>
         {% if settings.support_phone != blank %}<p>Phone: <a href="tel:{{ settings.support_phone | remove: ' ' | remove: '(' | remove: ')' | remove: '-' }}">{{ settings.support_phone }}</a></p>{% endif %}
         {% if settings.business_address != blank %}<p>Business address:</p><address>{{ settings.business_address | newline_to_br }}</address>{% endif %}
         <p><a href="/pages/contact">Open the contact page</a></p>

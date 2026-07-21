@@ -9,8 +9,45 @@
  */
 {
   "sections": {
-    "main": {
-      "type": "sales-funnel",
+    "hero": {
+      "type": "homepage-hero",
+      "settings": {
+        "product": "beardmate-2-in-1-beard-trimmer-with-built-in-vacuum",
+        "heading": "Trim Clean. Groom Smart.",
+        "text": "Meet the BeardMate vacuum beard trimmer, designed to capture trimmed hairs as you shave while delivering precise, professional beard styling at home.",
+        "benefit_1": "30-Day Money-Back Guarantee",
+        "benefit_2": "Tracked Shipping Available"
+      }
+    },
+    "ticker": {
+      "type": "homepage-ticker",
+      "blocks": {
+        "smart": {"type": "item", "settings": {"text": "Smart Grooming"}},
+        "technology": {"type": "item", "settings": {"text": "Technology"}},
+        "trim": {"type": "item", "settings": {"text": "Trim"}},
+        "capture": {"type": "item", "settings": {"text": "Capture"}},
+        "no_mess": {"type": "item", "settings": {"text": "No Mess"}}
+      },
+      "block_order": ["smart", "technology", "trim", "capture", "no_mess"]
+    },
+    "story": {
+      "type": "homepage-story",
+      "settings": {
+        "product": "beardmate-2-in-1-beard-trimmer-with-built-in-vacuum",
+        "heading": "Finally, A Trimmer That Keeps The Sink Clean"
+      }
+    },
+    "reviews": {"type": "homepage-reviews", "blocks": {}, "block_order": []},
+    "featured_product": {
+      "type": "homepage-featured-product",
+      "settings": {
+        "product": "beardmate-2-in-1-beard-trimmer-with-built-in-vacuum",
+        "fallback_title": "BeardMate 2-in-1 Beard Trimmer with Built In Vacuum"
+      }
+    },
+    "collection": {"type": "homepage-collection", "settings": {"collection": ""}},
+    "faq": {
+      "type": "homepage-faq",
       "blocks": {
         "faq_1": {
           "type": "faq",
@@ -46,20 +83,8 @@
         "faq_2",
         "faq_3",
         "faq_4"
-      ],
-      "settings": {
-        "product": "beardmate-2-in-1-beard-trimmer-with-built-in-vacuum",
-        "collection": "",
-        "heading": "Trim Clean. Groom Smart.",
-        "subheading": "Meet the BeardMate vacuum beard trimmer, designed to capture trimmed hairs as you shave while delivering precise, professional beard styling at home.",
-        "hero_benefit_1": "30-Day Money-Back Guarantee",
-        "hero_benefit_2": "Tracked Shipping Available",
-        "story_heading": "Finally, A Trimmer That Keeps The Sink Clean",
-        "product_name": "BeardMate 2-in-1 Beard Trimmer with Built In Vacuum"
-      }
+      ]
     }
   },
-  "order": [
-    "main"
-  ]
+  "order": ["hero", "ticker", "story", "reviews", "featured_product", "collection", "faq"]
 }

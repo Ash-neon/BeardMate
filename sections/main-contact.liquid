@@ -1,6 +1,5 @@
 {% liquid
   assign legal_name = settings.legal_business_name | default: 'ChaliseyZ Central L.L.C.'
-  assign support_email = settings.support_email | default: shop.email
 %}
 
 <section class="contact-hero">
@@ -17,7 +16,7 @@
       <h2>{{ legal_name }}</h2>
       <p>Owner and operator of the BeardMate store.</p>
       <dl>
-        {% if support_email != blank %}<div><dt>Email</dt><dd><a href="mailto:{{ support_email }}">{{ support_email }}</a></dd></div>{% endif %}
+        <div><dt>Contact</dt><dd>Use the secure message form on this page.</dd></div>
         {% if settings.support_phone != blank %}<div><dt>Phone</dt><dd><a href="tel:{{ settings.support_phone | remove: ' ' | remove: '(' | remove: ')' | remove: '-' }}">{{ settings.support_phone }}</a></dd></div>{% endif %}
         {% if settings.business_address != blank %}<div><dt>Business address</dt><dd><address>{{ settings.business_address | newline_to_br }}</address></dd></div>{% endif %}
         <div><dt>Support hours</dt><dd>{{ section.settings.support_hours }}</dd></div>

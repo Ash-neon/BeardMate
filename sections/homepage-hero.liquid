@@ -1,0 +1,46 @@
+{% liquid
+  assign featured_product = section.settings.product
+  assign hero_media = section.settings.image
+  if hero_media == blank
+    assign hero_media = featured_product.featured_image
+  endif
+%}
+
+<section class="reference-hero" id="shop-now">
+  <div class="container reference-hero__grid">
+    <div class="reference-hero__copy">
+      <p class="reference-eyebrow">{{ section.settings.eyebrow }}</p>
+      <h1>{{ section.settings.heading }}</h1>
+      <p class="reference-hero__lead">{{ section.settings.text }}</p>
+      <ul class="hero-guarantees" aria-label="Purchase benefits">
+        <li>{{ section.settings.benefit_1 }}</li>
+        <li>{{ section.settings.benefit_2 }}</li>
+      </ul>
+      <a class="reference-button" href="#featured-product">{{ section.settings.button_label }} <span aria-hidden="true">→</span></a>
+    </div>
+    <div class="reference-hero__media">
+      {% if hero_media != blank %}
+        {{ hero_media | image_url: width: 1600 | image_tag: widths: '600, 900, 1200, 1600', sizes: '(min-width: 900px) 52vw, 100vw', class: 'reference-hero__image', loading: 'eager', fetchpriority: 'high', alt: section.settings.heading }}
+      {% else %}
+        <img class="reference-hero__image" src="{{ 'hero-trimmer.svg' | asset_url }}" alt="BeardMate vacuum beard trimmer" width="760" height="560" fetchpriority="high">
+      {% endif %}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Homepage hero",
+  "settings": [
+    {"type": "product", "id": "product", "label": "Product used for fallback image"},
+    {"type": "image_picker", "id": "image", "label": "Hero image"},
+    {"type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "BeardMate Vacuum Beard Trimmer"},
+    {"type": "textarea", "id": "heading", "label": "Heading", "default": "Trim Clean. Groom Smart."},
+    {"type": "textarea", "id": "text", "label": "Description", "default": "Meet the BeardMate vacuum beard trimmer, designed to capture trimmed hairs as you shave while delivering precise, professional beard styling at home."},
+    {"type": "text", "id": "benefit_1", "label": "Benefit 1", "default": "30-Day Money-Back Guarantee"},
+    {"type": "text", "id": "benefit_2", "label": "Benefit 2", "default": "Tracked Shipping Available"},
+    {"type": "text", "id": "button_label", "label": "Button label", "default": "Shop BeardMate"}
+  ],
+  "presets": [{"name": "Homepage hero"}]
+}
+{% endschema %}

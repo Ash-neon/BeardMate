@@ -74,11 +74,6 @@
       },
       {
         "type": "text",
-        "id": "support_email",
-        "label": "Customer support email"
-      },
-      {
-        "type": "text",
         "id": "support_phone",
         "label": "Customer support phone"
       },
