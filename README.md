@@ -1,6 +1,6 @@
 # BeardMate Shopify Theme
 
-A production-oriented Shopify Online Store 2.0 theme for BeardMate, operated by ChaliseyZ Central L.L.C.
+A production-oriented Shopify theme for BeardMate, operated by ChaliseyZ Central L.L.C.
 
 ## Theme structure
 

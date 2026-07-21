@@ -1,23 +1,18 @@
 {% liquid
   assign legal_name = settings.legal_business_name | default: 'ChaliseyZ Central L.L.C.'
-  assign policy_title = 'Store policy'
-  assign policy_body = blank
+  assign policy_title = 'BeardMate policy'
   assign policy_type = 'policy'
   if request.path contains 'privacy-policy'
     assign policy_title = 'Privacy policy'
-    assign policy_body = shop.privacy_policy.body
     assign policy_type = 'privacy'
   elsif request.path contains 'refund-policy'
     assign policy_title = 'Refund policy'
-    assign policy_body = shop.refund_policy.body
     assign policy_type = 'refund'
   elsif request.path contains 'shipping-policy'
     assign policy_title = 'Shipping policy'
-    assign policy_body = shop.shipping_policy.body
     assign policy_type = 'shipping'
-  elsif request.path contains 'terms-of-service'
-    assign policy_title = 'Terms of service'
-    assign policy_body = shop.terms_of_service.body
+  elsif request.path contains 'terms-of-service' or request.path contains 'terms-of-use'
+    assign policy_title = 'Terms of use'
     assign policy_type = 'terms'
   endif
 %}
@@ -33,35 +28,33 @@
 <section class="policy-section">
   <div class="container policy-layout">
     <aside class="policy-nav">
-      <p>Store information</p>
+      <p>BeardMate policies</p>
       <a href="{{ shop.privacy_policy.url | default: '/policies/privacy-policy' }}" {% if policy_type == 'privacy' %}aria-current="page"{% endif %}>Privacy policy</a>
       <a href="{{ shop.refund_policy.url | default: '/policies/refund-policy' }}" {% if policy_type == 'refund' %}aria-current="page"{% endif %}>Refund policy</a>
       <a href="{{ shop.shipping_policy.url | default: '/policies/shipping-policy' }}" {% if policy_type == 'shipping' %}aria-current="page"{% endif %}>Shipping policy</a>
-      <a href="{{ shop.terms_of_service.url | default: '/policies/terms-of-service' }}" {% if policy_type == 'terms' %}aria-current="page"{% endif %}>Terms of service</a>
-      <a href="/pages/contact">Contact information</a>
+      <a href="{{ shop.terms_of_service.url | default: '/policies/terms-of-service' }}" {% if policy_type == 'terms' %}aria-current="page"{% endif %}>Terms of use</a>
+      <a href="{{ pages.contact.url | default: '/pages/contact' }}">Contact BeardMate</a>
     </aside>
 
     <article class="policy-content rte">
       <p class="policy-updated">Last updated: July 21, 2026</p>
-      <div class="legal-operator-note"><strong>Store operator</strong><p>BeardMate is a brand owned and operated by {{ legal_name }}. References to “BeardMate,” “we,” “us,” or “our” mean {{ legal_name }}.</p></div>
+      <div class="legal-operator-note"><strong>About BeardMate</strong><p>BeardMate is owned and operated by {{ legal_name }}. In these policies, “BeardMate,” “we,” “us,” and “our” refer to {{ legal_name }}.</p></div>
 
-      {% if policy_body != blank %}
-        {{ policy_body }}
-      {% elsif policy_type == 'privacy' %}
+      {% if policy_type == 'privacy' %}
         <h2>Scope</h2>
-        <p>This Privacy Policy explains how {{ legal_name }} collects, uses, discloses, and protects personal information when you visit the BeardMate store, communicate with us, or purchase our products.</p>
+        <p>This Privacy Policy explains how BeardMate collects, uses, discloses, and protects personal information when you visit the BeardMate website, communicate with us, or purchase BeardMate products.</p>
 
         <h2>Information we collect</h2>
-        <p>Depending on how you interact with the store, we may collect identifiers and contact details; billing, shipping, and transaction information; account and customer-support communications; device, browser, cookie, and usage information; and fraud-prevention or security information. Payment-card details are handled by Shopify and applicable payment processors rather than stored in full by us.</p>
+        <p>Depending on how you interact with BeardMate, we may collect contact details; billing, shipping, and transaction information; account and customer-support communications; device, browser, cookie, and usage information; and fraud-prevention or security information. Payment-card details are handled by our commerce and payment providers rather than stored in full by BeardMate.</p>
 
         <h2>How we use information</h2>
-        <p>We use personal information to provide and improve the store, process and deliver orders, communicate about purchases, provide customer support, manage returns, personalize the shopping experience, detect fraud, secure our services, comply with law, and send marketing where permitted or requested.</p>
+        <p>We use personal information to operate and improve BeardMate, process and deliver orders, communicate about purchases, provide customer support, manage returns, personalize your experience, detect fraud, secure our services, comply with law, and send marketing where permitted or requested.</p>
 
         <h2>How information is disclosed</h2>
-        <p>We may disclose information to Shopify; payment processors; fulfillment, delivery, hosting, analytics, advertising, customer-support, and fraud-prevention providers; professional advisers; government authorities when legally required; and parties involved in a legitimate business transaction. These parties receive information only as needed for their functions or as permitted by law.</p>
+        <p>We may disclose information to commerce, payment, fulfillment, delivery, hosting, analytics, advertising, customer-support, and fraud-prevention providers; professional advisers; government authorities when legally required; and parties involved in a legitimate business transaction. These parties receive information only as needed for their functions or as permitted by law.</p>
 
         <h2>Cookies and advertising</h2>
-        <p>The store and its providers may use cookies and similar technologies to keep the store functional, remember preferences, understand traffic, measure campaigns, and provide advertising. Where required, you can manage optional technologies through the store’s cookie or privacy controls and your browser settings.</p>
+        <p>BeardMate and its providers may use cookies and similar technologies to keep the website functional, remember preferences, understand traffic, measure campaigns, and provide advertising. Where required, you can manage optional technologies through available cookie or privacy controls and your browser settings.</p>
 
         <h2>Data retention and security</h2>
         <p>We retain personal information only for as long as reasonably necessary for the purposes described above, including legal, accounting, fraud-prevention, and dispute-resolution obligations. We use reasonable safeguards, but no method of electronic storage or transmission is completely secure.</p>
@@ -70,10 +63,10 @@
         <p>Depending on where you live, you may have rights to request access, correction, deletion, portability, restriction, or information about certain disclosures; to withdraw consent; or to opt out of certain targeted advertising, sharing, or sales as defined by applicable law. We may need to verify your identity before completing a request. You may appeal a refusal where local law provides that right.</p>
 
         <h2>Children’s information</h2>
-        <p>The store is not directed to children, and we do not knowingly collect personal information from children in violation of applicable law. A parent or guardian may contact us to request deletion.</p>
+        <p>BeardMate is not directed to children, and we do not knowingly collect personal information from children in violation of applicable law. A parent or guardian may contact us to request deletion.</p>
 
         <h2>International processing</h2>
-        <p>Shopify and other providers may process information in countries outside your own. Where required, appropriate safeguards are used for international transfers.</p>
+        <p>Our service providers may process information in countries outside your own. Where required, appropriate safeguards are used for international transfers.</p>
 
         <h2>Changes to this policy</h2>
         <p>We may update this policy to reflect operational, legal, or regulatory changes. The revised version will be posted here with a new “Last updated” date.</p>
@@ -85,7 +78,7 @@
         <p>To evaluate a grooming tool under our satisfaction guarantee, reasonable first-use inspection is allowed. The product must be returned with all included components, manuals, and accessories. We may reduce or deny a refund for damage caused by misuse, abuse, unauthorized modification, missing parts, or use beyond what is reasonably necessary to evaluate the product. Consumable personal-care goods that have been opened, gift cards, and items clearly marked final sale are not returnable unless defective or required by law.</p>
 
         <h2>How to start a return</h2>
-        <p>Email us with your order number, the item you want to return, and the reason for the request. For damage, defects, or an incorrect item, include clear photographs. If approved, we will provide return authorization and instructions.</p>
+        <p>Use the BeardMate contact form and provide your order number, the item you want to return, and the reason for the request. For damage, defects, or an incorrect item, include clear photographs when requested. If approved, we will provide return authorization and instructions.</p>
 
         <h2>Return destination</h2>
         {% if settings.returns_address != blank %}
@@ -128,10 +121,10 @@
         <p>Items may ship separately. If so, you may receive more than one tracking number and no additional shipping charge unless disclosed before payment.</p>
       {% elsif policy_type == 'terms' %}
         <h2>Agreement</h2>
-        <p>These Terms of Service govern your use of the BeardMate online store and purchases from {{ legal_name }}. By accessing the store or placing an order, you agree to these terms and the policies linked here. If you do not agree, do not use the store.</p>
+        <p>These Terms of Use govern your access to BeardMate and purchases from {{ legal_name }}. By using the BeardMate website or placing an order, you agree to these terms and the policies linked here. If you do not agree, do not use the website.</p>
 
-        <h2>Store use and eligibility</h2>
-        <p>You must be legally capable of entering a binding agreement and must provide current, complete, and accurate information. You may not use the store for unlawful, fraudulent, abusive, or unauthorized purposes; interfere with store security; or infringe another party’s rights.</p>
+        <h2>Use and eligibility</h2>
+        <p>You must be legally capable of entering a binding agreement and must provide current, complete, and accurate information. You may not use BeardMate for unlawful, fraudulent, abusive, or unauthorized purposes; interfere with security; or infringe another party’s rights.</p>
 
         <h2>Products and product information</h2>
         <p>We make reasonable efforts to describe and display products accurately. Colors and appearance may vary by device, and packaging or minor specifications may change without materially reducing product function. Product availability and purchase limits may apply. Directions, warnings, and care instructions supplied with the product must be followed.</p>
@@ -143,13 +136,13 @@
         <p>Our Shipping Policy and Refund Policy are incorporated into these terms. Title and risk of loss transfer as provided by applicable law and carrier terms. Nothing in these terms limits non-waivable consumer protections.</p>
 
         <h2>Intellectual property</h2>
-        <p>The BeardMate name, store design, text, graphics, logos, photographs, and other content are owned by or licensed to {{ legal_name }} and are protected by applicable intellectual-property laws. No license is granted except the limited right to use the store for personal shopping.</p>
+        <p>The BeardMate name, website design, text, graphics, logos, photographs, and other content are owned by or licensed to {{ legal_name }} and are protected by applicable intellectual-property laws. No license is granted except the limited right to use BeardMate for personal shopping.</p>
 
         <h2>Third-party services</h2>
-        <p>The store may rely on or link to services operated by Shopify, payment providers, carriers, and other third parties. Their own terms and privacy practices may apply. We are not responsible for third-party services outside our reasonable control.</p>
+        <p>BeardMate may rely on or link to services operated by commerce providers, payment providers, carriers, and other third parties. Their own terms and privacy practices may apply. We are not responsible for third-party services outside our reasonable control.</p>
 
         <h2>Disclaimer and limitation</h2>
-        <p>To the fullest extent permitted by law, the store and products are provided subject to the warranties expressly stated and any non-waivable statutory rights. We are not liable for indirect, incidental, special, or consequential damages arising from store use or product purchase where such limitations are lawful. These limitations do not apply where prohibited by law.</p>
+        <p>To the fullest extent permitted by law, BeardMate and its products are provided subject to the warranties expressly stated and any non-waivable statutory rights. We are not liable for indirect, incidental, special, or consequential damages arising from website use or product purchase where such limitations are lawful. These limitations do not apply where prohibited by law.</p>
 
         <h2>Changes and severability</h2>
         <p>We may update these terms prospectively by posting a revised version. If any provision is found unenforceable, the remaining provisions continue in effect.</p>
@@ -161,11 +154,11 @@
       {% endif %}
 
       <div class="policy-contact-card">
-        <h2>Contact {{ legal_name }}</h2>
+        <h2>Contact BeardMate</h2>
         <p>Customer support is available through our secure contact form.</p>
         {% if settings.support_phone != blank %}<p>Phone: <a href="tel:{{ settings.support_phone | remove: ' ' | remove: '(' | remove: ')' | remove: '-' }}">{{ settings.support_phone }}</a></p>{% endif %}
         {% if settings.business_address != blank %}<p>Business address:</p><address>{{ settings.business_address | newline_to_br }}</address>{% endif %}
-        <p><a href="/pages/contact">Open the contact page</a></p>
+        <p><a href="{{ pages.contact.url | default: '/pages/contact' }}">Open the BeardMate contact page</a></p>
       </div>
     </article>
   </div>
