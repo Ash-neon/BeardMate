@@ -1,0 +1,39 @@
+<section class="style-section container">
+  <div class="section-heading">
+    <p class="eyebrow">{{ section.settings.section_eyebrow }}</p>
+    <h2>{{ section.settings.section_heading }}</h2>
+  </div>
+  <div class="model-grid">
+    <article>
+      <img src="{{ section.settings.model_image_1 | asset_url }}" alt="{{ section.settings.model_title_1 }}" />
+      <h3>{{ section.settings.model_title_1 }}</h3>
+    </article>
+    <article>
+      <img src="{{ section.settings.model_image_2 | asset_url }}" alt="{{ section.settings.model_title_2 }}" />
+      <h3>{{ section.settings.model_title_2 }}</h3>
+    </article>
+    <article>
+      <img src="{{ section.settings.model_image_3 | asset_url }}" alt="{{ section.settings.model_title_3 }}" />
+      <h3>{{ section.settings.model_title_3 }}</h3>
+    </article>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Style gallery",
+  "settings": [
+    {"type": "text", "id": "section_eyebrow", "label": "Section eyebrow", "default": "Style your look"},
+    {"type": "text", "id": "section_heading", "label": "Section heading", "default": "Create a variety of beard styles with confidence"},
+    {"type": "image_picker", "id": "model_image_1", "label": "Model image 1", "default": "model-1.svg"},
+    {"type": "text", "id": "model_title_1", "label": "Model title 1", "default": "Defined jawlines"},
+    {"type": "image_picker", "id": "model_image_2", "label": "Model image 2", "default": "model-2.svg"},
+    {"type": "text", "id": "model_title_2", "label": "Model title 2", "default": "Sharp temples"},
+    {"type": "image_picker", "id": "model_image_3", "label": "Model image 3", "default": "model-3.svg"},
+    {"type": "text", "id": "model_title_3", "label": "Model title 3", "default": "Clean chin lines"}
+  ],
+  "presets": [
+    {"name": "Style gallery", "category": "Homepage"}
+  ]
+}
+{% endschema %}

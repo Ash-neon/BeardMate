@@ -1,0 +1,35 @@
+<section class="product-detail section-alt container">
+  <div class="detail-grid">
+    <div class="detail-media">
+      <img src="{{ section.settings.detail_image | asset_url }}" alt="{{ section.settings.detail_heading }}" />
+    </div>
+    <div class="detail-copy">
+      <p class="eyebrow">{{ section.settings.detail_eyebrow }}</p>
+      <h2>{{ section.settings.detail_heading }}</h2>
+      <p>{{ section.settings.detail_text }}</p>
+      <ul class="detail-list">
+        <li>{{ section.settings.detail_bullet_1 }}</li>
+        <li>{{ section.settings.detail_bullet_2 }}</li>
+        <li>{{ section.settings.detail_bullet_3 }}</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Product detail",
+  "settings": [
+    {"type": "image_picker", "id": "detail_image", "label": "Detail image", "default": "product-detail.svg"},
+    {"type": "text", "id": "detail_eyebrow", "label": "Eyebrow text", "default": "Professional grooming"},
+    {"type": "text", "id": "detail_heading", "label": "Heading", "default": "Designed for every beard style"},
+    {"type": "textarea", "id": "detail_text", "label": "Text", "default": "BeardMate is engineered to work on jawline, temples, chin, and neck areas with precision. The vacuum chamber collects hair while the dual-gear motor keeps the experience smooth and efficient."},
+    {"type": "text", "id": "detail_bullet_1", "label": "Bullet 1", "default": "One-press release chamber cleaning"},
+    {"type": "text", "id": "detail_bullet_2", "label": "Bullet 2", "default": "Built-in vacuum suction for no mess"},
+    {"type": "text", "id": "detail_bullet_3", "label": "Bullet 3", "default": "Waterproof, rechargeable, travel-ready"}
+  ],
+  "presets": [
+    {"name": "Product detail", "category": "Homepage"}
+  ]
+}
+{% endschema %}

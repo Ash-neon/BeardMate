@@ -1,0 +1,50 @@
+{
+  "sections": {
+    "hero": {
+      "type": "hero"
+    },
+    "product-info": {
+      "type": "product-info"
+    },
+    "payment-trust": {
+      "type": "payment-trust"
+    },
+    "feature": {
+      "type": "feature"
+    },
+    "product-detail": {
+      "type": "product-detail"
+    },
+    "style": {
+      "type": "style"
+    },
+    "features-list": {
+      "type": "features-list"
+    },
+    "testimonials": {
+      "type": "testimonials"
+    },
+    "faq": {
+      "type": "faq"
+    },
+    "related-products": {
+      "type": "related-products"
+    },
+    "footer": {
+      "type": "footer"
+    }
+  },
+  "order": [
+    "hero",
+    "product-info",
+    "payment-trust",
+    "feature",
+    "product-detail",
+    "style",
+    "features-list",
+    "testimonials",
+    "faq",
+    "related-products",
+    "footer"
+  ]
+}

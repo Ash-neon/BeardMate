@@ -1,0 +1,37 @@
+<section class="payment-trust section-alt">
+  <div class="container trust-grid">
+    <div>
+      <h2>{{ section.settings.payment_heading }}</h2>
+      <div class="payment-icons">
+        <span>{{ section.settings.payment_icon_1 }}</span>
+        <span>{{ section.settings.payment_icon_2 }}</span>
+        <span>{{ section.settings.payment_icon_3 }}</span>
+        <span>{{ section.settings.payment_icon_4 }}</span>
+      </div>
+    </div>
+    <div class="trust-badges">
+      <span>{{ section.settings.trust_badge_1 }}</span>
+      <span>{{ section.settings.trust_badge_2 }}</span>
+      <span>{{ section.settings.trust_badge_3 }}</span>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Payment and trust",
+  "settings": [
+    {"type": "text", "id": "payment_heading", "label": "Heading", "default": "Checkout securely with"},
+    {"type": "text", "id": "payment_icon_1", "label": "Payment label 1", "default": "VISA"},
+    {"type": "text", "id": "payment_icon_2", "label": "Payment label 2", "default": "Mastercard"},
+    {"type": "text", "id": "payment_icon_3", "label": "Payment label 3", "default": "American Express"},
+    {"type": "text", "id": "payment_icon_4", "label": "Payment label 4", "default": "G Pay"},
+    {"type": "text", "id": "trust_badge_1", "label": "Trust badge 1", "default": "100% Guaranteed"},
+    {"type": "text", "id": "trust_badge_2", "label": "Trust badge 2", "default": "Premium Quality"},
+    {"type": "text", "id": "trust_badge_3", "label": "Trust badge 3", "default": "Fast Shipping"}
+  ],
+  "presets": [
+    {"name": "Payment and trust", "category": "Homepage"}
+  ]
+}
+{% endschema %}

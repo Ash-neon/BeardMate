@@ -9,5 +9,61 @@
         "default": "Free shipping · 24/7 support available · Free shipping · 24/7 support available"
       }
     ]
+  },
+  {
+    "name": "Theme style",
+    "settings": [
+      {
+        "type": "select",
+        "id": "theme_style",
+        "label": "Theme style",
+        "options": [
+          {"value": "theme-light", "label": "Light"},
+          {"value": "theme-dark", "label": "Dark"}
+        ],
+        "default": "theme-light"
+      },
+      {
+        "type": "color",
+        "id": "accent_color",
+        "label": "Accent color",
+        "default": "#78c200"
+      },
+      {
+        "type": "color",
+        "id": "background_color",
+        "label": "Background color",
+        "default": "#f4f7f1"
+      },
+      {
+        "type": "color",
+        "id": "surface_color",
+        "label": "Surface color",
+        "default": "#ffffff"
+      },
+      {
+        "type": "color",
+        "id": "text_color",
+        "label": "Text color",
+        "default": "#121212"
+      },
+      {
+        "type": "color",
+        "id": "muted_color",
+        "label": "Muted text color",
+        "default": "#5a5a5a"
+      }
+    ]
+  },
+  {
+    "name": "Custom CSS",
+    "settings": [
+      {
+        "type": "textarea",
+        "id": "custom_css",
+        "label": "Custom CSS",
+        "default": ""
+      }
+    ]
   }
 ]

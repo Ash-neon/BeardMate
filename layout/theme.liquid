@@ -7,8 +7,26 @@
     <meta name="description" content="BeardMate 2-in-1 Beard Trimmer with Built-In Vacuum." />
     <link rel="stylesheet" href="{{ 'styles.css' | asset_url }}" />
     {{ content_for_header }}
+    <style>
+      :root {
+        --accent: {{ settings.accent_color | default: '#78c200' }};
+        --bg: {{ settings.background_color | default: '#f4f7f1' }};
+        --surface: {{ settings.surface_color | default: '#ffffff' }};
+        --text: {{ settings.text_color | default: '#121212' }};
+        --muted: {{ settings.muted_color | default: '#5a5a5a' }};
+      }
+      body.theme-dark {
+        --bg: #121212;
+        --surface: #1d1d1d;
+        --text: #f4f4f4;
+        --muted: #c3c3c3;
+      }
+    </style>
+    {% if settings.custom_css != blank %}
+      <style>{{ settings.custom_css }}</style>
+    {% endif %}
   </head>
-  <body>
+  <body class="{{ settings.theme_style | default: 'theme-light' }}">
     {{ content_for_layout }}
     <script src="{{ 'script.js' | asset_url }}"></script>
   </body>

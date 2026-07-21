@@ -1,0 +1,43 @@
+<footer class="site-footer">
+  <div class="container footer-inner">
+    <div>
+      <a href="#" class="logo-link footer-logo">
+        <img src="{{ section.settings.logo | asset_url }}" alt="{{ section.settings.brand_name }} logo" />
+      </a>
+      <p>{{ section.settings.description }}</p>
+    </div>
+    <div class="footer-links">
+      {% for link in section.blocks %}
+        <a href="{{ link.settings.link_url }}">{{ link.settings.link_text }}</a>
+      {% endfor %}
+    </div>
+  </div>
+  <div class="container footer-bottom">
+    <p>© <span id="year"></span> {{ section.settings.footer_text }}</p>
+  </div>
+</footer>
+
+{% schema %}
+{
+  "name": "Footer",
+  "settings": [
+    {"type": "image_picker", "id": "logo", "label": "Footer logo", "default": "logo.svg"},
+    {"type": "text", "id": "brand_name", "label": "Brand name", "default": "BeardMate"},
+    {"type": "textarea", "id": "description", "label": "Footer description", "default": "BeardMate provides modern grooming tools and beard care products designed to help men maintain a clean, sharp, and confident look every day."},
+    {"type": "text", "id": "footer_text", "label": "Footer text", "default": "BeardMate · Powered by Shopify"}
+  ],
+  "blocks": [
+    {
+      "type": "link",
+      "name": "Footer link",
+      "settings": [
+        {"type": "url", "id": "link_url", "label": "Link URL", "default": "#home"},
+        {"type": "text", "id": "link_text", "label": "Link text", "default": "Home"}
+      ]
+    }
+  ],
+  "presets": [
+    {"name": "Footer", "category": "Footer"}
+  ]
+}
+{% endschema %}
