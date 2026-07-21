@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="220" height="56" viewBox="0 0 220 56">
+  <defs>
+    <style>.black{fill:#111111;font-family:'Inter',sans-serif;font-weight:900;font-size:36px;} .green{fill:#7dc100;font-family:'Inter',sans-serif;font-weight:900;font-size:36px;}</style>
+  </defs>
+  <text x="0" y="40" class="black">BEARD</text>
+  <text x="145" y="40" class="green">MATE</text>
+</svg>
