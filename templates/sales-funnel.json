@@ -1,6 +1,5 @@
 {
   "sections": {
-    "header": {"type": "site-header"},
     "main": {
       "type": "sales-funnel",
       "blocks": {
@@ -10,8 +9,7 @@
         "faq_4": {"type": "faq", "settings": {"question": "What if BeardMate is not for me?", "answer": "Contact us within 30 days of delivery. Our support team will walk you through the return process under the refund policy linked below."}}
       },
       "block_order": ["faq_1", "faq_2", "faq_3", "faq_4"]
-    },
-    "footer": {"type": "footer"}
+    }
   },
-  "order": ["header", "main", "footer"]
+  "order": ["main"]
 }

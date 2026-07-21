@@ -1,5 +1,13 @@
 [
   {
+    "name": "theme_info",
+    "theme_name": "BeardMate",
+    "theme_version": "1.0.0",
+    "theme_author": "ChaliseyZ Central L.L.C.",
+    "theme_documentation_url": "https://help.shopify.com/manual/online-store/themes",
+    "theme_support_url": "https://help.shopify.com/"
+  },
+  {
     "name": "Homepage settings",
     "settings": [
       {

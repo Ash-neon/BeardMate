@@ -50,10 +50,17 @@
 
       {% if active_product != blank %}
         {% form 'product', active_product, id: 'ProductPageForm', class: 'product-page-form' %}
-          <input type="hidden" name="id" value="{{ active_variant.id }}">
+          {% unless active_product.has_only_default_variant %}
+            <label for="ProductVariant-{{ section.id }}">{{ 'products.product.variant' | t }}</label>
+            <select id="ProductVariant-{{ section.id }}" name="id">
+              {% for variant in active_product.variants %}<option value="{{ variant.id }}"{% if variant == active_variant %} selected{% endif %}{% unless variant.available %} disabled{% endunless %}>{{ variant.title }} — {{ variant.price | money }}{% unless variant.available %} — {{ 'products.product.sold_out' | t }}{% endunless %}</option>{% endfor %}
+            </select>
+          {% else %}
+            <input type="hidden" name="id" value="{{ active_variant.id }}">
+          {% endunless %}
           <label for="ProductPageQuantity-{{ section.id }}">Quantity</label>
           <select id="ProductPageQuantity-{{ section.id }}" name="quantity"><option value="1">1</option><option value="2">2</option><option value="3">3</option></select>
-          <button class="btn btn--lime" type="submit" name="add" {% unless active_variant.available %}disabled{% endunless %}>{% if active_variant.available %}{{ section.settings.cta_primary }}{% else %}Sold out{% endif %}</button>
+          <button class="btn btn--lime" type="submit" name="add" {% unless active_variant.available %}disabled{% endunless %}>{% if active_variant.available %}{{ section.settings.cta_primary }}{% else %}{{ 'products.product.sold_out' | t }}{% endif %}</button>
           {{ form | payment_button }}
         {% endform %}
       {% else %}

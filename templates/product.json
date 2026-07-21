@@ -1,6 +1,5 @@
 {
   "sections": {
-    "header": {"type": "site-header"},
     "hero": {"type": "hero"},
     "product_info": {"type": "product-info"},
     "payment": {"type": "payment-trust"},
@@ -19,8 +18,7 @@
       },
       "block_order": ["faq_1", "faq_2", "faq_3", "faq_4", "faq_5", "faq_6"]
     },
-    "related": {"type": "related-products"},
-    "footer": {"type": "footer"}
+    "related": {"type": "related-products"}
   },
-  "order": ["header", "hero", "product_info", "payment", "details", "features", "testimonials", "faq", "related", "footer"]
+  "order": ["hero", "product_info", "payment", "details", "features", "testimonials", "faq", "related"]
 }

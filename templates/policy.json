@@ -1,8 +1,6 @@
 {
   "sections": {
-    "header": {"type": "site-header"},
-    "main": {"type": "main-policy"},
-    "footer": {"type": "footer"}
+    "main": {"type": "main-policy"}
   },
-  "order": ["header", "main", "footer"]
+  "order": ["main"]
 }

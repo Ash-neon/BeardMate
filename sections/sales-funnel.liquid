@@ -134,12 +134,19 @@
           {% if selected_variant.compare_at_price > selected_variant.price %}<small>Sale</small>{% endif %}
         </div>
         {% form 'product', featured_product, class: 'featured-product-form', id: 'FeaturedProductForm' %}
-          <input type="hidden" name="id" value="{{ selected_variant.id }}">
+          {% unless featured_product.has_only_default_variant %}
+            <label for="FeaturedVariant-{{ section.id }}">{{ 'products.product.variant' | t }}</label>
+            <select id="FeaturedVariant-{{ section.id }}" name="id">
+              {% for variant in featured_product.variants %}<option value="{{ variant.id }}"{% if variant == selected_variant %} selected{% endif %}{% unless variant.available %} disabled{% endunless %}>{{ variant.title }} — {{ variant.price | money }}{% unless variant.available %} — {{ 'products.product.sold_out' | t }}{% endunless %}</option>{% endfor %}
+            </select>
+          {% else %}
+            <input type="hidden" name="id" value="{{ selected_variant.id }}">
+          {% endunless %}
           <label for="ProductQuantity-{{ section.id }}">Quantity</label>
           <select id="ProductQuantity-{{ section.id }}" name="quantity">
             <option value="1">1</option><option value="2">2</option><option value="3">3</option>
           </select>
-          <button class="reference-button reference-button--outline" type="submit" name="add" {% unless selected_variant.available %}disabled{% endunless %}>{% if selected_variant.available %}Add to cart{% else %}Sold out{% endif %}</button>
+          <button class="reference-button reference-button--outline" type="submit" name="add" {% unless selected_variant.available %}disabled{% endunless %}>{% if selected_variant.available %}{{ 'products.product.add_to_cart' | t }}{% else %}{{ 'products.product.sold_out' | t }}{% endif %}</button>
           {{ form | payment_button }}
         {% endform %}
       {% else %}

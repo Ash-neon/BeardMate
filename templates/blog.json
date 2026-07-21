@@ -1,6 +1,6 @@
 {
   "sections": {
-    "main": {"type": "main-page"}
+    "main": {"type": "main-blog"}
   },
   "order": ["main"]
 }

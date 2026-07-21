@@ -13,12 +13,16 @@
       <a class="brand brand--footer" href="{{ routes.root_url }}" aria-label="BeardMate home"><span class="brand__mark"><span>BEARD</span><strong>MATE</strong></span><small>by {{ legal_name }}</small></a>
     </div>
     <nav class="footer-column" aria-label="Footer navigation">
-      <a href="{{ routes.root_url }}">Home</a>
-      <a href="{{ routes.root_url }}#shop-now">Shop Now</a>
-      <a href="{{ routes.all_products_collection_url }}">The Collection</a>
-      <a href="{{ routes.search_url }}">Search</a>
-      <a href="{{ section.settings.tracking_url }}">Track Your Order</a>
-      <a href="/pages/contact">Contact Us</a>
+      {% if section.settings.menu != blank %}
+        {% for link in section.settings.menu.links %}<a href="{{ link.url }}">{{ link.title }}</a>{% endfor %}
+      {% else %}
+        <a href="{{ routes.root_url }}">Home</a>
+        <a href="{{ routes.root_url }}#shop-now">Shop Now</a>
+        <a href="{{ routes.all_products_collection_url }}">The Collection</a>
+        <a href="{{ routes.search_url }}">Search</a>
+        {% if section.settings.tracking_url != blank %}<a href="{{ section.settings.tracking_url }}">Track Your Order</a>{% endif %}
+        <a href="{{ pages.contact.url | default: '/pages/contact' }}">Contact Us</a>
+      {% endif %}
     </nav>
     <div class="footer-about">
       <h2>About BeardMate</h2>
@@ -40,7 +44,7 @@
       <a href="{{ refund_url }}">Refund policy</a>
       <a href="{{ shipping_url }}">Shipping policy</a>
       <a href="{{ terms_url }}">Terms of service</a>
-      <a href="/pages/contact">Contact information</a>
+      <a href="{{ pages.contact.url | default: '/pages/contact' }}">Contact information</a>
     </div>
   </div>
 
@@ -64,8 +68,9 @@
 {
   "name": "Footer",
   "settings": [
+    {"type": "link_list", "id": "menu", "label": "Footer menu"},
     {"type": "textarea", "id": "description", "label": "Brand description", "default": "BeardMate provides modern grooming tools and beard care products designed to help men maintain a clean, sharp, and confident look every day."},
-    {"type": "url", "id": "tracking_url", "label": "Tracking page URL", "default": "/pages/track-your-order"}
+    {"type": "url", "id": "tracking_url", "label": "Tracking page URL"}
   ],
   "presets": [{"name": "Footer"}]
 }

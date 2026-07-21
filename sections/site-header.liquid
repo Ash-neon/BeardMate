@@ -28,11 +28,15 @@
     </button>
 
     <nav class="primary-nav" id="primaryNavigation" aria-label="Primary navigation" data-mobile-nav>
-      <a href="{{ routes.root_url }}"{% if request.page_type == 'index' %} aria-current="page"{% endif %}>Home</a>
-      <a href="{{ routes.root_url }}#shop-now">Shop Now</a>
-      <a href="{{ routes.all_products_collection_url }}">The Collection</a>
-      <a href="/pages/contact">Contact Us</a>
-      <a href="{{ section.settings.tracking_url }}">Track Your Order</a>
+      {% if section.settings.menu != blank %}
+        {% for link in section.settings.menu.links %}<a href="{{ link.url }}"{% if link.current %} aria-current="page"{% endif %}>{{ link.title }}</a>{% endfor %}
+      {% else %}
+        <a href="{{ routes.root_url }}"{% if request.page_type == 'index' %} aria-current="page"{% endif %}>Home</a>
+        <a href="{{ routes.root_url }}#shop-now">Shop Now</a>
+        <a href="{{ routes.all_products_collection_url }}">The Collection</a>
+        <a href="{{ pages.contact.url | default: '/pages/contact' }}">Contact Us</a>
+        {% if section.settings.tracking_url != blank %}<a href="{{ section.settings.tracking_url }}">Track Your Order</a>{% endif %}
+      {% endif %}
     </nav>
 
     <div class="header-actions">
@@ -55,9 +59,10 @@
   "name": "Site header",
   "settings": [
     {"type": "image_picker", "id": "logo", "label": "Logo"},
+    {"type": "link_list", "id": "menu", "label": "Main menu"},
     {"type": "text", "id": "announcement", "label": "Announcement", "default": "Free Shipping"},
     {"type": "text", "id": "announcement_extra", "label": "Second announcement", "default": "Customer Support Available"},
-    {"type": "url", "id": "tracking_url", "label": "Tracking page URL", "default": "/pages/track-your-order"}
+    {"type": "url", "id": "tracking_url", "label": "Tracking page URL"}
   ],
   "presets": [{"name": "Site header"}]
 }

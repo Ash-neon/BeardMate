@@ -1,0 +1,35 @@
+<section class="store-page catalog-page">
+  <div class="container">
+    <div class="store-page__heading store-page__heading--split">
+      <div><p class="reference-eyebrow">{{ 'collections.general.eyebrow' | t }}</p><h1>{{ collection.title }}</h1></div>
+      <form class="sort-form" action="{{ collection.url }}" method="get">
+        <label for="SortBy">{{ 'collections.sorting.title' | t }}</label>
+        <select id="SortBy" name="sort_by">
+          {% assign sort_by = collection.sort_by | default: collection.default_sort_by %}
+          {% for option in collection.sort_options %}<option value="{{ option.value }}"{% if option.value == sort_by %} selected{% endif %}>{{ option.name }}</option>{% endfor %}
+        </select>
+        <button class="btn" type="submit">{{ 'collections.sorting.apply' | t }}</button>
+      </form>
+    </div>
+    {% if collection.description != blank %}<div class="rte collection-description">{{ collection.description }}</div>{% endif %}
+    {% paginate collection.products by section.settings.products_per_page %}
+      {% if collection.products_count > 0 %}
+        <div class="catalog-grid">
+          {% for product in collection.products %}{% render 'product-card', product: product %}{% endfor %}
+        </div>
+        {{ paginate | default_pagination }}
+      {% else %}
+        <div class="empty-state"><h2>{{ 'collections.general.empty' | t }}</h2><a class="reference-button" href="{{ routes.all_products_collection_url }}">{{ 'collections.general.shop_all' | t }}</a></div>
+      {% endif %}
+    {% endpaginate %}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Main collection",
+  "settings": [
+    {"type": "range", "id": "products_per_page", "label": "Products per page", "min": 8, "max": 32, "step": 4, "default": 16}
+  ]
+}
+{% endschema %}

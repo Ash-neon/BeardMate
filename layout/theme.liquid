@@ -26,10 +26,12 @@
     {% if settings.custom_css != blank %}<style>{{ settings.custom_css }}</style>{% endif %}
   </head>
   <body>
-    <a class="skip-link" href="#MainContent">Skip to content</a>
+    <a class="skip-link" href="#MainContent">{{ 'general.accessibility.skip_to_content' | t }}</a>
+    {% sections 'header-group' %}
     <main id="MainContent" tabindex="-1">
       {{ content_for_layout }}
     </main>
+    {% sections 'footer-group' %}
     <div class="toast" id="siteToast" role="status" aria-live="polite" aria-atomic="true"></div>
     <script src="{{ 'script.js' | asset_url }}" defer></script>
   </body>

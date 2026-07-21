@@ -1,10 +1,6 @@
 {
   "sections": {
-    "not-found": {
-      "type": "not-found"
-    }
+    "not-found": {"type": "not-found"}
   },
-  "order": [
-    "not-found"
-  ]
+  "order": ["not-found"]
 }

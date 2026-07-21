@@ -1,0 +1,19 @@
+<article class="store-page article-page">
+  <div class="container article-page__inner">
+    <a class="text-link" href="{{ blog.url }}">← {{ blog.title }}</a>
+    <header>
+      <p class="reference-eyebrow">{{ article.published_at | date: format: 'date' }}</p>
+      <h1>{{ article.title }}</h1>
+      {% if article.author != blank %}<p>{{ 'blogs.article.by_author' | t: author: article.author }}</p>{% endif %}
+    </header>
+    {% if article.image != blank %}{{ article.image | image_url: width: 1800 | image_tag: widths: '700, 1100, 1500, 1800', loading: 'eager', alt: article.image.alt | default: article.title }}{% endif %}
+    <div class="rte">{{ article.content }}</div>
+  </div>
+</article>
+
+{% schema %}
+{
+  "name": "Main article",
+  "settings": []
+}
+{% endschema %}

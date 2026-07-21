@@ -1,8 +1,6 @@
 {
   "sections": {
-    "header": {"type": "site-header"},
-    "main": {"type": "main-contact"},
-    "footer": {"type": "footer"}
+    "main": {"type": "main-contact"}
   },
-  "order": ["header", "main", "footer"]
+  "order": ["main"]
 }

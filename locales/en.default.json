@@ -1,7 +1,93 @@
 {
+  "date_formats": {
+    "date": "%B %d, %Y"
+  },
   "general": {
     "accessibility": {
       "skip_to_content": "Skip to content"
+    },
+    "404": {
+      "title": "Page not found",
+      "text": "The page you requested does not exist. Return home or continue shopping.",
+      "back_home": "Back to home"
+    }
+  },
+  "products": {
+    "product": {
+      "add_to_cart": "Add to cart",
+      "sold_out": "Sold out",
+      "sale": "Sale",
+      "variant": "Choose an option",
+      "from_price": "From {{ price }}"
+    }
+  },
+  "cart": {
+    "general": {
+      "eyebrow": "Your order",
+      "title": "Shopping cart",
+      "empty": "Your cart is empty",
+      "empty_text": "Find the grooming essentials that belong in your routine.",
+      "continue_shopping": "Continue shopping",
+      "quantity": "Quantity",
+      "remove": "Remove",
+      "update": "Update cart",
+      "summary": "Order summary",
+      "subtotal": "Subtotal",
+      "taxes_shipping": "Taxes and shipping are calculated at checkout.",
+      "note": "Order note",
+      "checkout": "Checkout"
+    }
+  },
+  "collections": {
+    "general": {
+      "eyebrow": "The collection",
+      "title": "Shop all collections",
+      "empty": "No products found",
+      "shop_all": "Shop all products",
+      "product_count": "{{ count }} products"
+    },
+    "sorting": {
+      "title": "Sort by",
+      "apply": "Apply"
+    }
+  },
+  "search": {
+    "general": {
+      "title": "Search BeardMate",
+      "label": "Search",
+      "placeholder": "Search products, articles, and pages",
+      "submit": "Search",
+      "no_results": "No results found for “{{ terms }}”.",
+      "results": "{{ count }} results for “{{ terms }}”",
+      "read_more": "Read more"
+    }
+  },
+  "blogs": {
+    "general": {
+      "eyebrow": "Journal",
+      "read_more": "Read article",
+      "empty": "No articles have been published yet."
+    },
+    "article": {
+      "by_author": "By {{ author }}"
+    }
+  },
+  "password": {
+    "general": {
+      "eyebrow": "BeardMate",
+      "password": "Store password",
+      "enter": "Enter store"
+    }
+  },
+  "gift_cards": {
+    "issued": {
+      "title": "{{ shop }} gift card",
+      "eyebrow": "BeardMate gift card",
+      "expired": "This gift card is no longer active.",
+      "expiration": "Expires {{ date }}",
+      "instructions": "Use this code during checkout.",
+      "shop": "Shop BeardMate",
+      "print": "Print gift card"
     }
   }
 }

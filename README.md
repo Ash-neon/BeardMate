@@ -1,27 +1,25 @@
-# BeardMate
+# BeardMate Shopify Theme
 
-A polished Shopify-style storefront concept for a premium beard care brand.
+A production-oriented Shopify Online Store 2.0 theme for BeardMate, operated by ChaliseyZ Central L.L.C.
 
-## Structure
-- `index.html` – main storefront layout
-- `styles.css` – visual styling and responsive layout
-- `script.js` – small interactions such as the mobile menu and footer year
+## Theme structure
+
+- `assets/` — storefront CSS, JavaScript, and non-product fallback graphics
+- `blocks/` — reusable theme-editor blocks
+- `config/` — global settings and saved theme data
+- `layout/` — storefront and password page wrappers
+- `locales/` — translated storefront strings
+- `sections/` — global section groups and merchant-editable page sections
+- `snippets/` — reusable Liquid components
+- `templates/` — JSON templates for Shopify storefront resource types
+
+The product photography displayed by the theme comes from Shopify product media or merchant-selected image settings. The sample export's generated PNGs are not included.
 
 ## Preview locally
-Open the theme files in Shopify or use Shopify CLI to preview locally in a development store.
-
-If you still want a local static view, use `python3 -m http.server 8000` and visit http://127.0.0.1:8000/.
+Use Shopify CLI with a development store, or connect the GitHub branch directly from Shopify Admin. Liquid pages cannot be accurately previewed with a static HTTP server because Shopify supplies products, collections, carts, policies, and routes at render time.
 
 ## Shopify theme structure
-This repository follows Shopify theme conventions for a GitHub-connected theme:
-
-- `layout/theme.liquid` — the main theme wrapper
-- `templates/*.json` — page templates used by Online Store 2.0
-- `sections/*.liquid` — editable sections for homepage and page templates
-- `assets/*` — CSS, JS, image and asset files
-- `config/settings_schema.json` — theme editor settings
-- `config/settings_data.json` — theme defaults
-- `locales/*.json` — localization files
+The theme includes native templates for home, product, cart, collection, collection list, search, standard pages, contact, policies, blog, article, password, and 404 pages. Global header and footer content is managed through Shopify section groups.
 
 ## GitHub integration with Shopify
 To connect this repo to Shopify:
