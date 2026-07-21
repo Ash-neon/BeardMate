@@ -1,0 +1,10 @@
+{
+  "current": "default",
+  "presets": {
+    "default": {
+      "name": "Default",
+      "sections": {}
+    }
+  },
+  "current_template": "index"
+}

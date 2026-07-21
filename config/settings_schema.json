@@ -1,0 +1,13 @@
+[
+  {
+    "name": "Homepage settings",
+    "settings": [
+      {
+        "type": "text",
+        "id": "announcement_text",
+        "label": "Announcement text",
+        "default": "Free shipping · 24/7 support available · Free shipping · 24/7 support available"
+      }
+    ]
+  }
+]
