@@ -74,6 +74,7 @@ document.querySelectorAll('.faq-button').forEach((button) => {
 
 document.querySelectorAll('form[action*="/cart/add"]').forEach((form) => {
   form.addEventListener('submit', async (event) => {
+    if (!event.submitter || event.submitter.name !== 'add') return;
     event.preventDefault();
     const submitButton = form.querySelector('[type="submit"]');
     const originalText = submitButton?.innerHTML;

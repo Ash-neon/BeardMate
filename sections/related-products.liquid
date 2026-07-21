@@ -1,35 +1,37 @@
-<section class="related-products container">
-  <h2>{{ section.settings.heading }}</h2>
-  <div class="related-grid">
-    {% for product in section.blocks %}
-      <article>
-        <img src="{{ product.settings.image | asset_url }}" alt="{{ product.settings.title }}" />
-        <h3>{{ product.settings.title }}</h3>
-        <span>{{ product.settings.price }}</span>
-      </article>
-    {% endfor %}
-  </div>
-</section>
+{% liquid
+  assign related_collection = section.settings.collection
+  assign related_items = related_collection.products
+  if related_collection == blank
+    assign related_items = collections.all.products
+  endif
+%}
+
+{% if related_items != blank %}
+  <section class="related-products">
+    <div class="container">
+      <h2>{{ section.settings.heading }}</h2>
+      <div class="related-grid">
+        {% for item in related_items limit: 4 %}
+          {% unless item.id == product.id %}
+            <a class="related-card" href="{{ item.url }}">
+              <div>{% if item.featured_image != blank %}{{ item.featured_image | image_url: width: 700 | image_tag: widths: '300, 500, 700', loading: 'lazy', alt: item.title }}{% else %}{{ 'product-1' | placeholder_svg_tag }}{% endif %}</div>
+              <h3>{{ item.title }}</h3>
+              <p>{% if item.compare_at_price > item.price %}<s>{{ item.compare_at_price | money }}</s>{% endif %} {{ item.price | money }}</p>
+            </a>
+          {% endunless %}
+        {% endfor %}
+      </div>
+    </div>
+  </section>
+{% endif %}
 
 {% schema %}
 {
   "name": "Related products",
   "settings": [
-    {"type": "text", "id": "heading", "label": "Heading", "default": "You may also like"}
+    {"type": "text", "id": "heading", "label": "Heading", "default": "You May Also Like"},
+    {"type": "collection", "id": "collection", "label": "Collection"}
   ],
-  "blocks": [
-    {
-      "type": "product",
-      "name": "Product",
-      "settings": [
-        {"type": "image_picker", "id": "image", "label": "Image", "default": "gallery-1.svg"},
-        {"type": "text", "id": "title", "label": "Title", "default": "BeardMate 3-in-1 Eye Cream for Men"},
-        {"type": "text", "id": "price", "label": "Price", "default": "$22.66 USD"}
-      ]
-    }
-  ],
-  "presets": [
-    {"name": "Related products", "category": "Homepage"}
-  ]
+  "presets": [{"name": "Related products"}]
 }
 {% endschema %}

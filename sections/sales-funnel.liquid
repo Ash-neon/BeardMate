@@ -1,201 +1,191 @@
 {% liquid
   assign featured_product = section.settings.product
   assign selected_variant = featured_product.selected_or_first_available_variant
-  assign product_title = section.settings.product_name
-  assign current_price = section.settings.fallback_price
-  assign compare_price = section.settings.fallback_compare_price
-  if featured_product != blank
-    assign product_title = featured_product.title
-    assign current_price = selected_variant.price | money
-    if selected_variant.compare_at_price > selected_variant.price
-      assign compare_price = selected_variant.compare_at_price | money
-    else
-      assign compare_price = blank
-    endif
+  assign hero_media = section.settings.hero_image
+  assign product_media = section.settings.product_image
+  if hero_media == blank
+    assign hero_media = featured_product.featured_image
+  endif
+  if product_media == blank
+    assign product_media = featured_product.featured_image
+  endif
+  assign gallery_media_1 = section.settings.gallery_image_1
+  assign gallery_media_2 = section.settings.gallery_image_2
+  assign gallery_media_3 = section.settings.gallery_image_3
+  if gallery_media_1 == blank
+    assign gallery_media_1 = featured_product.images[1]
+  endif
+  if gallery_media_2 == blank
+    assign gallery_media_2 = featured_product.images[2]
+  endif
+  if gallery_media_3 == blank
+    assign gallery_media_3 = featured_product.images[3]
+  endif
+  assign featured_collection = section.settings.collection
+  assign collection_products = featured_collection.products
+  if featured_collection == blank
+    assign collection_products = collections.all.products
   endif
 %}
 
-<section class="hero" id="shop-now">
-  <div class="container hero__grid">
-    <div class="hero__copy">
-      <div class="eyebrow"><span></span>{{ section.settings.eyebrow }}</div>
+<section class="reference-hero" id="shop-now">
+  <div class="container reference-hero__grid">
+    <div class="reference-hero__copy">
+      <p class="reference-eyebrow">BeardMate Vacuum Beard Trimmer</p>
       <h1>{{ section.settings.heading }}</h1>
-      <p class="hero__lead">{{ section.settings.subheading }}</p>
+      <p class="reference-hero__lead">{{ section.settings.subheading }}</p>
+      <ul class="hero-guarantees" aria-label="Purchase benefits">
+        <li>{{ section.settings.hero_benefit_1 }}</li>
+        <li>{{ section.settings.hero_benefit_2 }}</li>
+      </ul>
+      <a class="reference-button" href="#featured-product">Shop BeardMate <span aria-hidden="true">→</span></a>
+    </div>
+    <div class="reference-hero__media">
+      {% if hero_media != blank %}
+        {{ hero_media | image_url: width: 1600 | image_tag: widths: '600, 900, 1200, 1600', sizes: '(min-width: 900px) 52vw, 100vw', class: 'reference-hero__image', loading: 'eager', fetchpriority: 'high', alt: featured_product.title }}
+      {% else %}
+        <img class="reference-hero__image" src="{{ 'hero-trimmer.svg' | asset_url }}" alt="BeardMate vacuum beard trimmer" width="760" height="560" fetchpriority="high">
+      {% endif %}
+    </div>
+  </div>
+</section>
 
-      <div class="rating-row" aria-label="Rated 4.9 out of 5 from over 2,400 customers">
-        <span class="stars" aria-hidden="true">★★★★★</span>
-        <strong>4.9</strong>
-        <span>2,400+ clean counters</span>
+<section class="feature-ticker" aria-label="Product features">
+  <div class="feature-ticker__track">
+    {% for index in (1..5) %}
+      <span>Smart Grooming</span><i>•</i><span>Technology</span><i>•</i><span>Trim</span><i>•</i><span>Capture</span><i>•</i><span>No Mess</span><i>•</i>
+    {% endfor %}
+  </div>
+</section>
+
+<section class="product-story" id="why">
+  <div class="container">
+    <h2>{{ section.settings.story_heading }}</h2>
+    <div class="product-story__grid">
+      <article class="story-card">
+        <div class="story-card__media">
+          {% if gallery_media_1 != blank %}
+            {{ gallery_media_1 | image_url: width: 1000 | image_tag: widths: '450, 700, 1000', sizes: '(min-width: 900px) 33vw, 100vw', loading: 'lazy', alt: 'BeardMate adjustable grooming lengths' }}
+          {% else %}
+            <img src="{{ 'style-grid.svg' | asset_url }}" alt="BeardMate beard length guide" width="720" height="420" loading="lazy">
+          {% endif %}
+        </div>
+        <div class="story-card__copy"><span>01</span><h3>One trimmer. Every beard.</h3><p>Dial in your preferred length for clean stubble, sharp lines, or a fuller beard.</p></div>
+      </article>
+      <article class="story-card story-card--center">
+        <div class="story-card__media">
+          {% if gallery_media_2 != blank %}
+            {{ gallery_media_2 | image_url: width: 1000 | image_tag: widths: '450, 700, 1000', sizes: '(min-width: 900px) 33vw, 100vw', loading: 'lazy', alt: 'BeardMate rechargeable vacuum trimmer' }}
+          {% else %}
+            <img src="{{ 'product-detail.svg' | asset_url }}" alt="BeardMate rechargeable vacuum trimmer kit" width="720" height="420" loading="lazy">
+          {% endif %}
+        </div>
+        <div class="story-card__copy"><span>02</span><h3>Power that keeps up.</h3><p>A high-capacity battery, travel lock, and cordless design keep every trim easy.</p></div>
+      </article>
+      <article class="story-card">
+        <div class="story-card__media">
+          {% if gallery_media_3 != blank %}
+            {{ gallery_media_3 | image_url: width: 1000 | image_tag: widths: '450, 700, 1000', sizes: '(min-width: 900px) 33vw, 100vw', loading: 'lazy', alt: 'Clean sink after using BeardMate' }}
+          {% else %}
+            <img src="{{ 'before-after.svg' | asset_url }}" alt="Sink before and after using BeardMate" width="720" height="420" loading="lazy">
+          {% endif %}
+        </div>
+        <div class="story-card__copy"><span>03</span><h3>No more hair in your sink.</h3><p>The built-in vacuum chamber captures trimmed hair while you shave.</p></div>
+      </article>
+    </div>
+    <p class="product-story__summary">Our advanced grooming system <strong>captures trimmed hairs as you shave</strong>, keeping your routine clean and effortless. No mess. No cleanup.</p>
+  </div>
+</section>
+
+{% assign review_blocks = section.blocks | where: 'type', 'review' %}
+{% if review_blocks != blank %}
+  <section class="reference-reviews" id="reviews">
+    <div class="container reference-reviews__inner">
+      <h2>Verified Customer Reviews</h2>
+      <div class="reference-review-grid">
+        {% for block in review_blocks %}
+          <article class="reference-review" {{ block.shopify_attributes }}>
+            <strong>{{ block.settings.name }} — Verified Buyer</strong>
+            <p>{{ block.settings.quote }}</p>
+            <div><em>{{ block.settings.detail }}</em> <span aria-label="5 out of 5 stars">★★★★★</span></div>
+          </article>
+        {% endfor %}
       </div>
+    </div>
+  </section>
+{% endif %}
 
-      <div class="hero__price">
-        <span class="price-now">{{ current_price }}</span>
-        {% if compare_price != blank %}<span class="price-old">{{ compare_price }}</span>{% endif %}
-        <span class="price-chip">Save 35%</span>
-      </div>
-
+<section class="featured-product" id="featured-product">
+  <div class="container featured-product__grid">
+    <div class="featured-product__media">
+      {% if product_media != blank %}
+        {{ product_media | image_url: width: 1400 | image_tag: widths: '600, 900, 1200, 1400', sizes: '(min-width: 900px) 50vw, 100vw', loading: 'lazy', alt: featured_product.title }}
+      {% else %}
+        <img src="{{ 'hero-trimmer.svg' | asset_url }}" alt="BeardMate 2-in-1 vacuum beard trimmer" width="760" height="560" loading="lazy">
+      {% endif %}
+    </div>
+    <div class="featured-product__copy">
+      <p class="reference-eyebrow">BeardMate</p>
+      <h2>{{ featured_product.title | default: section.settings.product_name }}</h2>
       {% if featured_product != blank %}
-        {% form 'product', featured_product, class: 'buy-form', id: 'HeroProductForm' %}
+        <div class="featured-price">
+          {% if selected_variant.compare_at_price > selected_variant.price %}<span>{{ selected_variant.compare_at_price | money }}</span>{% endif %}
+          <strong>{{ selected_variant.price | money }}</strong>
+          {% if selected_variant.compare_at_price > selected_variant.price %}<small>Sale</small>{% endif %}
+        </div>
+        {% form 'product', featured_product, class: 'featured-product-form', id: 'FeaturedProductForm' %}
           <input type="hidden" name="id" value="{{ selected_variant.id }}">
-          <div class="buy-row">
-            <label class="quantity-field">
-              <span class="sr-only">Quantity</span>
-              <select name="quantity" aria-label="Quantity">
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-              </select>
-            </label>
-            <button class="btn btn--lime btn--wide" type="submit" name="add" {% unless selected_variant.available %}disabled{% endunless %}>
-              {% if selected_variant.available %}Add to cart{% else %}Sold out{% endif %}
-              <span aria-hidden="true">→</span>
-            </button>
-          </div>
+          <label for="ProductQuantity-{{ section.id }}">Quantity</label>
+          <select id="ProductQuantity-{{ section.id }}" name="quantity">
+            <option value="1">1</option><option value="2">2</option><option value="3">3</option>
+          </select>
+          <button class="reference-button reference-button--outline" type="submit" name="add" {% unless selected_variant.available %}disabled{% endunless %}>{% if selected_variant.available %}Add to cart{% else %}Sold out{% endif %}</button>
+          {{ form | payment_button }}
         {% endform %}
       {% else %}
-        <div class="buy-row">
-          <a class="btn btn--lime btn--wide" href="{{ routes.all_products_collection_url }}">Shop BeardMate <span aria-hidden="true">→</span></a>
-        </div>
+        <div class="featured-price"><span>$49.99</span><strong>$34.99 USD</strong><small>Sale</small></div>
+        <a class="reference-button" href="{{ routes.all_products_collection_url }}">Shop the collection</a>
       {% endif %}
+      <div class="payment-trust-row">
+        <p>Checkout securely with</p>
+        <div>
+          {% for type in shop.enabled_payment_types %}{{ type | payment_type_svg_tag }}{% endfor %}
+        </div>
+      </div>
+      <ul class="product-assurances"><li>30-day guarantee</li><li>Premium quality</li><li>Fast shipping</li></ul>
+    </div>
+  </div>
+</section>
 
-      <div class="micro-trust">
-        <span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m5 12 4 4L19 6"/></svg>30-day guarantee</span>
-        <span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 7h11v10H3zM14 10h4l3 3v4h-7zM7 20a2 2 0 1 0 0-4 2 2 0 0 0 0 4Zm10 0a2 2 0 1 0 0-4 2 2 0 0 0 0 4Z"/></svg>Tracked shipping</span>
+{% if collection_products != blank %}
+  <section class="routine-section" id="collection">
+    <div class="container">
+      <div class="routine-heading"><div><p class="reference-eyebrow">The Collection</p><h2>Complete Your Routine</h2></div><a href="{{ featured_collection.url | default: routes.all_products_collection_url }}">View all <span aria-hidden="true">→</span></a></div>
+      <div class="routine-grid">
+        {% for item in collection_products limit: 4 %}
+          <a class="routine-card" href="{{ item.url }}">
+            <div class="routine-card__image">
+              {% if item.featured_image != blank %}{{ item.featured_image | image_url: width: 700 | image_tag: widths: '300, 500, 700', loading: 'lazy', alt: item.title }}{% else %}{{ 'product-1' | placeholder_svg_tag }}{% endif %}
+              {% if item.compare_at_price > item.price %}<span>Sale</span>{% endif %}
+            </div>
+            <h3>{{ item.title }}</h3>
+            <p>{% if item.compare_at_price > item.price %}<s>{{ item.compare_at_price | money }}</s>{% endif %} {{ item.price | money }}</p>
+          </a>
+        {% endfor %}
       </div>
     </div>
+  </section>
+{% endif %}
 
-    <div class="hero__media">
-      <div class="hero__image-shell">
-        {% if section.settings.hero_image != blank %}
-          {{ section.settings.hero_image | image_url: width: 1800 | image_tag: widths: '640, 900, 1200, 1600, 1800', sizes: '(min-width: 990px) 52vw, 100vw', class: 'hero__image', loading: 'eager', fetchpriority: 'high', alt: product_title }}
-        {% else %}
-          <img class="hero__image" src="{{ 'hero-trimmer.svg' | asset_url }}" alt="{{ product_title | escape }} vacuum beard trimmer with accessories" width="760" height="560" fetchpriority="high">
-        {% endif %}
-        <span class="hero-badge hero-badge--top"><strong>90%</strong> less mess</span>
-        <span class="hero-badge hero-badge--bottom"><strong>120 min</strong> cordless power</span>
-      </div>
-      <div class="hero__caption">
-        <span>01</span>
-        <p>Precision blades meet built-in vacuum capture.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section class="press-strip" aria-label="BeardMate highlights">
-  <div class="container press-strip__inner">
-    <p>GROOM SMARTER</p><span></span><p>TRIM CLEANER</p><span></span><p>LOOK SHARPER</p><span></span><p>REPEAT</p>
-  </div>
-</section>
-
-<section class="section benefits" id="why">
-  <div class="container">
-    <div class="section-heading">
-      <div><p class="kicker">The better bathroom routine</p><h2>{{ section.settings.benefits_heading }}</h2></div>
-      <p>{{ section.settings.benefits_intro }}</p>
-    </div>
-    <div class="benefit-grid">
-      <article class="benefit-card benefit-card--dark">
-        <span class="card-number">01</span>
-        <div class="feature-icon"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M8 8h16v14a6 6 0 0 1-6 6h-4a6 6 0 0 1-6-6V8Zm4 0V4m8 4V4M11 15h10"/></svg></div>
-        <h3>Vacuum as you trim</h3>
-        <p>Cut hairs are pulled straight into the removable chamber—not scattered across your sink.</p>
-      </article>
-      <article class="benefit-card">
-        <span class="card-number">02</span>
-        <div class="feature-icon"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M5 18c5-2 7-8 11-13 4 5 6 11 11 13-1 6-5 10-11 10S6 24 5 18Z"/></svg></div>
-        <h3>Rinse. Reset. Done.</h3>
-        <p>The water-resistant body and one-touch chamber make cleanup a thirty-second job.</p>
-      </article>
-      <article class="benefit-card benefit-card--lime">
-        <span class="card-number">03</span>
-        <div class="feature-icon"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M19 3 8 18h8l-3 11 11-15h-8l3-11Z"/></svg></div>
-        <h3>Power that travels</h3>
-        <p>Up to 120 minutes of cordless trimming with USB-C charging and a travel lock.</p>
-      </article>
-    </div>
-  </div>
-</section>
-
-<section class="section how" id="how-it-works">
-  <div class="container how__grid">
-    <div class="how__media">
-      <img src="{{ 'product-detail.svg' | asset_url }}" alt="BeardMate complete vacuum trimmer kit" width="720" height="420" loading="lazy">
-      <div class="orbit-label"><strong>360°</strong><span>grooming system</span></div>
-    </div>
-    <div class="how__content">
-      <p class="kicker">Built around your morning</p>
-      <h2>Good beard. Clean sink. Same five minutes.</h2>
-      <div class="steps">
-        <article><span>1</span><div><h3>Choose your length</h3><p>Click on one of the two guide combs for an even, controlled trim.</p></div></article>
-        <article><span>2</span><div><h3>Trim in any direction</h3><p>Self-sharpening blades cut cleanly while the airflow captures loose hair.</p></div></article>
-        <article><span>3</span><div><h3>Empty with one touch</h3><p>Release the chamber, rinse, and get on with your day.</p></div></article>
-      </div>
-      <a class="text-link" href="#shop-now">Meet your new trimmer <span aria-hidden="true">↗</span></a>
-    </div>
-  </div>
-</section>
-
-<section class="section comparison">
-  <div class="container comparison__grid">
-    <div class="comparison__copy">
-      <p class="kicker">The cleanup comparison</p>
-      <h2>Less time wiping. More time looking sharp.</h2>
-      <p>Most trimmers stop at the blade. BeardMate solves the part everyone else ignores: the mess afterward.</p>
-    </div>
-    <div class="comparison-table" role="table" aria-label="Product comparison">
-      <div class="comparison-row comparison-row--head" role="row"><span role="columnheader">Feature</span><strong role="columnheader">BeardMate</strong><span role="columnheader">Regular trimmer</span></div>
-      <div class="comparison-row" role="row"><span role="cell">Hair capture</span><strong role="cell">Built in</strong><span role="cell">None</span></div>
-      <div class="comparison-row" role="row"><span role="cell">Cleanup</span><strong role="cell">30 seconds</strong><span role="cell">The whole sink</span></div>
-      <div class="comparison-row" role="row"><span role="cell">Runtime</span><strong role="cell">Up to 120 min</strong><span role="cell">60 min average</span></div>
-      <div class="comparison-row" role="row"><span role="cell">Travel lock</span><strong role="cell">Included</strong><span role="cell">Sometimes</span></div>
-    </div>
-  </div>
-</section>
-
-<section class="section reviews" id="reviews">
-  <div class="container">
-    <div class="reviews__top">
-      <div><p class="kicker">Verified clean freaks</p><h2>Turns out, nobody misses sink hair.</h2></div>
-      <div class="review-score"><strong>4.9</strong><span class="stars">★★★★★</span><small>Based on 2,400+ reviews</small></div>
-    </div>
-    <div class="review-grid">
-      {% for block in section.blocks %}
-        {% if block.type == 'review' %}
-          <article class="review-card" {{ block.shopify_attributes }}>
-            <div class="stars" aria-label="5 out of 5 stars">★★★★★</div>
-            <blockquote>“{{ block.settings.quote }}”</blockquote>
-            <div class="review-author"><span>{{ block.settings.name | slice: 0 }}</span><div><strong>{{ block.settings.name }}</strong><small>Verified buyer · {{ block.settings.detail }}</small></div></div>
-          </article>
-        {% endif %}
-      {% endfor %}
-    </div>
-  </div>
-</section>
-
-<section class="section final-cta">
-  <div class="container final-cta__inner">
+<section class="reference-faq" id="faq">
+  <div class="container reference-faq__grid">
+    <div><p class="reference-eyebrow">Good to know</p><h2>Questions Before You Trim?</h2></div>
     <div>
-      <p class="kicker">Your sink will thank you</p>
-      <h2>Make the last messy trim your last.</h2>
-    </div>
-    <div class="final-cta__action">
-      <p><strong>{{ current_price }}</strong>{% if compare_price != blank %}<span>{{ compare_price }}</span>{% endif %}</p>
-      <a class="btn btn--lime" href="#shop-now">Get BeardMate <span aria-hidden="true">↑</span></a>
-      <small>Free tracked shipping · 30-day guarantee</small>
-    </div>
-  </div>
-</section>
-
-<section class="section faq" id="faq">
-  <div class="container faq__grid">
-    <div class="faq__intro"><p class="kicker">Questions, answered</p><h2>Before you trim.</h2><p>Still curious? Email <a href="mailto:{{ shop.email | default: 'hello@beardmate.com' }}">{{ shop.email | default: 'hello@beardmate.com' }}</a>.</p></div>
-    <div class="faq__items">
       {% for block in section.blocks %}
         {% if block.type == 'faq' %}
-          <details class="faq-item" {{ block.shopify_attributes }} {% if forloop.first %}open{% endif %}>
-            <summary>{{ block.settings.question }}<span aria-hidden="true"></span></summary>
-            <div class="faq-answer"><p>{{ block.settings.answer }}</p></div>
+          <details class="reference-faq__item" {{ block.shopify_attributes }}>
+            <summary>{{ block.settings.question }}<span aria-hidden="true">+</span></summary>
+            <p>{{ block.settings.answer }}</p>
           </details>
         {% endif %}
       {% endfor %}
@@ -208,48 +198,38 @@
   "name": "BeardMate homepage",
   "settings": [
     {"type": "product", "id": "product", "label": "Featured product"},
-    {"type": "image_picker", "id": "hero_image", "label": "Hero product image"},
-    {"type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "The no-mess grooming system"},
-    {"type": "textarea", "id": "heading", "label": "Heading", "default": "A sharper beard. Without the evidence."},
-    {"type": "textarea", "id": "subheading", "label": "Subheading", "default": "The precision trimmer with built-in vacuum capture—engineered to leave your beard sharp and your counter spotless."},
-    {"type": "text", "id": "product_name", "label": "Fallback product name", "default": "BeardMate Vacuum Trimmer"},
-    {"type": "text", "id": "fallback_price", "label": "Fallback price", "default": "$49.00"},
-    {"type": "text", "id": "fallback_compare_price", "label": "Fallback compare price", "default": "$75.00"},
-    {"type": "text", "id": "benefits_heading", "label": "Benefits heading", "default": "One tool. Zero evidence."},
-    {"type": "textarea", "id": "benefits_intro", "label": "Benefits introduction", "default": "Engineered to solve the entire trim—from the first pass to the last stray hair."}
+    {"type": "collection", "id": "collection", "label": "Featured collection"},
+    {"type": "image_picker", "id": "hero_image", "label": "Hero lifestyle image"},
+    {"type": "image_picker", "id": "product_image", "label": "Featured product image"},
+    {"type": "image_picker", "id": "gallery_image_1", "label": "Product story image 1"},
+    {"type": "image_picker", "id": "gallery_image_2", "label": "Product story image 2"},
+    {"type": "image_picker", "id": "gallery_image_3", "label": "Product story image 3"},
+    {"type": "textarea", "id": "heading", "label": "Hero heading", "default": "Trim Clean. Groom Smart."},
+    {"type": "textarea", "id": "subheading", "label": "Hero description", "default": "Meet the BeardMate vacuum beard trimmer, designed to capture trimmed hairs as you shave while delivering precise, professional beard styling at home."},
+    {"type": "text", "id": "hero_benefit_1", "label": "Hero benefit 1", "default": "30-Day Money-Back Guarantee"},
+    {"type": "text", "id": "hero_benefit_2", "label": "Hero benefit 2", "default": "Tracked Shipping Available"},
+    {"type": "text", "id": "story_heading", "label": "Product story heading", "default": "Finally, A Trimmer That Keeps The Sink Clean"},
+    {"type": "text", "id": "product_name", "label": "Fallback product name", "default": "BeardMate 2-in-1 Beard Trimmer with Built In Vacuum"}
   ],
   "blocks": [
     {
       "type": "review",
       "name": "Review",
       "settings": [
-        {"type": "textarea", "id": "quote", "label": "Quote", "default": "I used to avoid trimming before work because of the cleanup. Now the sink is practically spotless."},
-        {"type": "text", "id": "name", "label": "Name", "default": "Marcus T."},
-        {"type": "text", "id": "detail", "label": "Detail", "default": "Short beard"}
+        {"type": "textarea", "id": "quote", "label": "Quote", "default": "The vacuum feature really works and the adjustable length dial makes it easy to get the exact beard length I want."},
+        {"type": "text", "id": "name", "label": "Name", "default": "Michael R."},
+        {"type": "text", "id": "detail", "label": "Location or detail", "default": "Austin, TX"}
       ]
     },
     {
       "type": "faq",
       "name": "FAQ",
       "settings": [
-        {"type": "text", "id": "question", "label": "Question", "default": "Does it really catch all the hair?"},
-        {"type": "textarea", "id": "answer", "label": "Answer", "default": "The built-in vacuum is designed to capture most trimmed hairs as you groom. A few strays can happen depending on technique and hair length, but cleanup is dramatically reduced."}
+        {"type": "text", "id": "question", "label": "Question", "default": "Does the vacuum actually collect hair?"},
+        {"type": "textarea", "id": "answer", "label": "Answer", "default": "Yes. The integrated vacuum pulls most trimmed hairs directly into the removable collection chamber while you groom."}
       ]
     }
   ],
-  "presets": [
-    {
-      "name": "BeardMate homepage",
-      "blocks": [
-        {"type": "review", "settings": {"name": "Marcus T.", "detail": "Short beard", "quote": "I used to avoid trimming before work because of the cleanup. Now the sink is practically spotless."}},
-        {"type": "review", "settings": {"name": "Andre W.", "detail": "Coarse beard", "quote": "Solid power, comfortable in hand, and the chamber is genuinely easy to empty. It feels properly thought through."}},
-        {"type": "review", "settings": {"name": "Jamie R.", "detail": "Weekly trim", "quote": "Bought it for the vacuum. Kept it because the trim itself is better than my old premium shaver."}},
-        {"type": "faq", "settings": {"question": "Does it really catch all the hair?", "answer": "The built-in vacuum is designed to capture most trimmed hairs as you groom. A few strays can happen depending on technique and hair length, but cleanup is dramatically reduced."}},
-        {"type": "faq", "settings": {"question": "What beard lengths can I trim?", "answer": "The included guide combs cover everyday stubble through a fuller short beard. Use the bare blade for crisp cheek, neck, and mustache lines."}},
-        {"type": "faq", "settings": {"question": "Can I rinse the whole trimmer?", "answer": "The body is water-resistant for easy rinsing. Empty the chamber first, keep the charging port closed, and allow the trimmer to dry fully before charging."}},
-        {"type": "faq", "settings": {"question": "What if BeardMate is not for me?", "answer": "Contact us within 30 days of delivery. Our support team will walk you through the return process under the refund policy linked below."}}
-      ]
-    }
-  ]
+  "presets": [{"name": "BeardMate homepage"}]
 }
 {% endschema %}

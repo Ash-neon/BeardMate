@@ -1,35 +1,38 @@
-<section class="testimonials container">
-  <h2>{{ section.settings.heading }}</h2>
-  <div class="testimonials-grid">
-    {% for testimonial in section.blocks %}
-      <article>
-        <img src="{{ testimonial.settings.image | asset_url }}" alt="{{ testimonial.settings.name }} testimonial" />
-        <p>{{ testimonial.settings.quote }}</p>
-        <span>{{ testimonial.settings.name }}</span>
-      </article>
-    {% endfor %}
+{% if section.blocks.size > 0 %}<section class="product-testimonials">
+  <div class="container">
+    <div class="product-testimonials__heading"><h2>{{ section.settings.heading }}</h2><p>Published customer feedback should be verified against real orders.</p></div>
+    <div class="product-testimonials__grid">
+      {% for testimonial in section.blocks %}
+        <article {{ testimonial.shopify_attributes }}>
+          {% if testimonial.settings.image != blank %}
+            {{ testimonial.settings.image | image_url: width: 700 | image_tag: widths: '300, 500, 700', loading: 'lazy', alt: testimonial.settings.name }}
+          {% else %}
+            <div class="testimonial-placeholder"><span>{{ testimonial.settings.name | slice: 0 }}</span></div>
+          {% endif %}
+          <blockquote>“{{ testimonial.settings.quote }}”</blockquote>
+          <div class="stars" aria-label="5 out of 5 stars">★★★★★</div>
+          <strong>{{ testimonial.settings.name }}</strong>
+        </article>
+      {% endfor %}
+    </div>
   </div>
-</section>
+</section>{% endif %}
 
 {% schema %}
 {
   "name": "Testimonials",
-  "settings": [
-    {"type": "text", "id": "heading", "label": "Heading", "default": "What Our Customers Say"}
-  ],
+  "settings": [{"type": "text", "id": "heading", "label": "Heading", "default": "Customers Are Saying"}],
   "blocks": [
     {
       "type": "testimonial",
       "name": "Testimonial",
       "settings": [
-        {"type": "image_picker", "id": "image", "label": "Image", "default": "gallery-3.svg"},
-        {"type": "text", "id": "quote", "label": "Quote", "default": "Work’s good and no mess, like the way to adjust height."},
+        {"type": "image_picker", "id": "image", "label": "Customer image"},
+        {"type": "text", "id": "quote", "label": "Quote", "default": "Works great and no mess. I like the easy height adjustment."},
         {"type": "text", "id": "name", "label": "Name", "default": "Jim S."}
       ]
     }
   ],
-  "presets": [
-    {"name": "Testimonials", "category": "Homepage"}
-  ]
+  "presets": [{"name": "Testimonials"}]
 }
 {% endschema %}

@@ -1,33 +1,31 @@
-<section class="faq section-alt">
-  <div class="container faq-grid">
+<section class="product-faq">
+  <div class="container product-faq__grid">
     <h2>{{ section.settings.heading }}</h2>
-    {% for faq in section.blocks %}
-      <div class="faq-item">
-        <button class="faq-button" aria-expanded="false">{{ faq.settings.question }}</button>
-        <div class="faq-panel">{{ faq.settings.answer }}</div>
-      </div>
-    {% endfor %}
+    <div>
+      {% for faq in section.blocks %}
+        <details class="product-faq__item" {{ faq.shopify_attributes }}>
+          <summary>{{ faq.settings.question }}<span aria-hidden="true">⌄</span></summary>
+          <p>{{ faq.settings.answer }}</p>
+        </details>
+      {% endfor %}
+    </div>
   </div>
 </section>
 
 {% schema %}
 {
   "name": "FAQ",
-  "settings": [
-    {"type": "text", "id": "heading", "label": "Heading", "default": "Frequently Asked Questions"}
-  ],
+  "settings": [{"type": "text", "id": "heading", "label": "Heading", "default": "Frequently Asked Questions"}],
   "blocks": [
     {
       "type": "faq_item",
       "name": "FAQ item",
       "settings": [
         {"type": "text", "id": "question", "label": "Question", "default": "Does the vacuum actually collect hair?"},
-        {"type": "textarea", "id": "answer", "label": "Answer", "default": "Yes — the integrated vacuum pulls trimmed hair into the built-in chamber during use."}
+        {"type": "textarea", "id": "answer", "label": "Answer", "default": "Yes. The integrated vacuum pulls most trimmed hair into the built-in chamber while you groom."}
       ]
     }
   ],
-  "presets": [
-    {"name": "FAQ", "category": "Homepage"}
-  ]
+  "presets": [{"name": "FAQ"}]
 }
 {% endschema %}

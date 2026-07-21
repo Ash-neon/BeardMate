@@ -29,7 +29,7 @@
     <div class="product-copy">
       <p class="eyebrow"><span></span>{{ section.settings.eyebrow_text }}</p>
       <h1>{{ active_product.title | default: section.settings.heading }}</h1>
-      <div class="rating-row"><span class="stars" aria-hidden="true">★★★★★</span><strong>4.9</strong><span>{{ section.settings.review_count }}</span></div>
+      {% if section.settings.review_count != blank %}<div class="rating-row"><span class="stars" aria-hidden="true">★★★★★</span><span>{{ section.settings.review_count }}</span></div>{% endif %}
       <p class="hero__lead">{{ active_product.description | strip_html | truncatewords: 28 | default: section.settings.lead_text }}</p>
 
       <div class="hero__price">
@@ -48,17 +48,18 @@
         <li>{{ section.settings.benefit_item_3 }}</li>
       </ul>
 
-      <div class="actions-row">
-        {% if active_product != blank %}
-          {% form 'product', active_product, id: 'ProductPageForm' %}
-            <input type="hidden" name="id" value="{{ active_variant.id }}">
-            <button class="btn btn--lime" type="submit" name="add" {% unless active_variant.available %}disabled{% endunless %}>{% if active_variant.available %}{{ section.settings.cta_primary }}{% else %}Sold out{% endif %}</button>
-          {% endform %}
-        {% else %}
-          <a class="btn btn--lime" href="{{ routes.all_products_collection_url }}">{{ section.settings.cta_primary }}</a>
-        {% endif %}
-        <button class="btn btn-secondary" type="button" data-share>{{ section.settings.cta_secondary }}</button>
-      </div>
+      {% if active_product != blank %}
+        {% form 'product', active_product, id: 'ProductPageForm', class: 'product-page-form' %}
+          <input type="hidden" name="id" value="{{ active_variant.id }}">
+          <label for="ProductPageQuantity-{{ section.id }}">Quantity</label>
+          <select id="ProductPageQuantity-{{ section.id }}" name="quantity"><option value="1">1</option><option value="2">2</option><option value="3">3</option></select>
+          <button class="btn btn--lime" type="submit" name="add" {% unless active_variant.available %}disabled{% endunless %}>{% if active_variant.available %}{{ section.settings.cta_primary }}{% else %}Sold out{% endif %}</button>
+          {{ form | payment_button }}
+        {% endform %}
+      {% else %}
+        <a class="btn btn--lime" href="{{ routes.all_products_collection_url }}">{{ section.settings.cta_primary }}</a>
+      {% endif %}
+      <button class="share-button" type="button" data-share><span aria-hidden="true">↥</span> {{ section.settings.cta_secondary }}</button>
     </div>
   </div>
 </section>
@@ -71,7 +72,7 @@
     {"type": "text", "id": "eyebrow_text", "label": "Eyebrow text", "default": "BeardMate"},
     {"type": "text", "id": "heading", "label": "Fallback heading", "default": "BeardMate 2-in-1 Vacuum Trimmer"},
     {"type": "textarea", "id": "lead_text", "label": "Fallback description", "default": "Mess-free beard trimming starts here."},
-    {"type": "text", "id": "review_count", "label": "Review count text", "default": "2,400+ reviews"},
+    {"type": "text", "id": "review_count", "label": "Verified review count text"},
     {"type": "text", "id": "price_old", "label": "Fallback old price", "default": "$75.00"},
     {"type": "text", "id": "price_now", "label": "Fallback price", "default": "$49.00"},
     {"type": "text", "id": "badge_text", "label": "Badge text", "default": "Save 35%"},

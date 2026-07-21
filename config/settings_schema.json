@@ -56,6 +56,49 @@
     ]
   },
   {
+    "name": "Business information",
+    "settings": [
+      {
+        "type": "text",
+        "id": "legal_business_name",
+        "label": "Legal business name",
+        "default": "ChaliseyZ Central L.L.C."
+      },
+      {
+        "type": "text",
+        "id": "support_email",
+        "label": "Customer support email"
+      },
+      {
+        "type": "text",
+        "id": "support_phone",
+        "label": "Customer support phone"
+      },
+      {
+        "type": "textarea",
+        "id": "business_address",
+        "label": "Public business address"
+      },
+      {
+        "type": "textarea",
+        "id": "returns_address",
+        "label": "Authorized returns address"
+      },
+      {
+        "type": "text",
+        "id": "shipping_processing",
+        "label": "Order processing estimate",
+        "default": "1–3 business days"
+      },
+      {
+        "type": "text",
+        "id": "shipping_delivery",
+        "label": "Standard delivery estimate",
+        "default": "3–8 business days after dispatch"
+      }
+    ]
+  },
+  {
     "name": "Custom CSS",
     "settings": [
       {

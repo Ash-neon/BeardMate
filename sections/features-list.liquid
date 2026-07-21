@@ -1,22 +1,12 @@
-<section class="feature-list container">
-  <h2>{{ section.settings.heading }}</h2>
-  <div class="feature-grid">
-    <article>
-      <h3>{{ section.settings.feature_1_title }}</h3>
-      <p>{{ section.settings.feature_1_copy }}</p>
-    </article>
-    <article>
-      <h3>{{ section.settings.feature_2_title }}</h3>
-      <p>{{ section.settings.feature_2_copy }}</p>
-    </article>
-    <article>
-      <h3>{{ section.settings.feature_3_title }}</h3>
-      <p>{{ section.settings.feature_3_copy }}</p>
-    </article>
-    <article>
-      <h3>{{ section.settings.feature_4_title }}</h3>
-      <p>{{ section.settings.feature_4_copy }}</p>
-    </article>
+<section class="product-benefits-wave">
+  <div class="container product-benefits-wave__inner">
+    <h2>{{ section.settings.heading }}</h2>
+    <div class="product-benefit-list">
+      <article><h3>{{ section.settings.feature_1_title }}</h3><p>{{ section.settings.feature_1_copy }}</p><span>♜ No Mess Trim</span></article>
+      <article><h3>{{ section.settings.feature_2_title }}</h3><p>{{ section.settings.feature_2_copy }}</p><span>ϟ Quick Groom Routine</span></article>
+      <article><h3>{{ section.settings.feature_3_title }}</h3><p>{{ section.settings.feature_3_copy }}</p><span>💧 Easy Wash Design</span></article>
+      <article><h3>{{ section.settings.feature_4_title }}</h3><p>{{ section.settings.feature_4_copy }}</p><span>✈ Travel Friendly</span></article>
+    </div>
   </div>
 </section>
 
@@ -30,12 +20,10 @@
     {"type": "text", "id": "feature_2_title", "label": "Feature 2 title", "default": "Fast & Easy Grooming"},
     {"type": "textarea", "id": "feature_2_copy", "label": "Feature 2 copy", "default": "Trim your beard in minutes without extra cleanup afterward."},
     {"type": "text", "id": "feature_3_title", "label": "Feature 3 title", "default": "Waterproof Cleaning"},
-    {"type": "textarea", "id": "feature_3_copy", "label": "Feature 3 copy", "default": "IPX6 waterproof design allows easy rinsing under running water after trimming."},
+    {"type": "textarea", "id": "feature_3_copy", "label": "Feature 3 copy", "default": "The water-resistant design makes rinsing and resetting easy after trimming."},
     {"type": "text", "id": "feature_4_title", "label": "Feature 4 title", "default": "Travel Friendly"},
     {"type": "textarea", "id": "feature_4_copy", "label": "Feature 4 copy", "default": "Rechargeable cordless design makes it easy to groom anywhere."}
   ],
-  "presets": [
-    {"name": "Feature list", "category": "Homepage"}
-  ]
+  "presets": [{"name": "Feature list"}]
 }
 {% endschema %}

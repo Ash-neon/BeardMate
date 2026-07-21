@@ -4,15 +4,12 @@
     "main": {
       "type": "sales-funnel",
       "blocks": {
-        "review_1": {"type": "review", "settings": {"name": "Marcus T.", "detail": "Short beard", "quote": "I used to avoid trimming before work because of the cleanup. Now the sink is practically spotless."}},
-        "review_2": {"type": "review", "settings": {"name": "Andre W.", "detail": "Coarse beard", "quote": "Solid power, comfortable in hand, and the chamber is genuinely easy to empty. It feels properly thought through."}},
-        "review_3": {"type": "review", "settings": {"name": "Jamie R.", "detail": "Weekly trim", "quote": "Bought it for the vacuum. Kept it because the trim itself is better than my old premium shaver."}},
         "faq_1": {"type": "faq", "settings": {"question": "Does it really catch all the hair?", "answer": "The built-in vacuum is designed to capture most trimmed hairs as you groom. A few strays can happen depending on technique and hair length, but cleanup is dramatically reduced."}},
         "faq_2": {"type": "faq", "settings": {"question": "What beard lengths can I trim?", "answer": "The included guide combs cover everyday stubble through a fuller short beard. Use the bare blade for crisp cheek, neck, and mustache lines."}},
         "faq_3": {"type": "faq", "settings": {"question": "Can I rinse the whole trimmer?", "answer": "The body is water-resistant for easy rinsing. Empty the chamber first, keep the charging port closed, and allow the trimmer to dry fully before charging."}},
         "faq_4": {"type": "faq", "settings": {"question": "What if BeardMate is not for me?", "answer": "Contact us within 30 days of delivery. Our support team will walk you through the return process under the refund policy linked below."}}
       },
-      "block_order": ["review_1", "review_2", "review_3", "faq_1", "faq_2", "faq_3", "faq_4"]
+      "block_order": ["faq_1", "faq_2", "faq_3", "faq_4"]
     },
     "footer": {"type": "footer"}
   },

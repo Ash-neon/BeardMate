@@ -1,23 +1,17 @@
-<section class="product-info container">
-  <div class="tabs-grid">
-    <div class="accordion">
-      <button class="accordion-button active" aria-expanded="true">{{ section.settings.detail_title }}</button>
-      <div class="accordion-panel" style="display:block;">
-        <p>{{ section.settings.detail_content }}</p>
-      </div>
-    </div>
-    <div class="accordion">
-      <button class="accordion-button" aria-expanded="false">{{ section.settings.shipping_title }}</button>
-      <div class="accordion-panel">
-        <p>{{ section.settings.shipping_content }}</p>
-      </div>
-    </div>
-    <div class="accordion">
-      <button class="accordion-button" aria-expanded="false">{{ section.settings.refund_title }}</button>
-      <div class="accordion-panel">
-        <p>{{ section.settings.refund_content }}</p>
-      </div>
-    </div>
+<section class="product-info">
+  <div class="container product-info__inner">
+    <details class="product-info__item">
+      <summary><span>🔬</span>{{ section.settings.detail_title }}<i aria-hidden="true">⌄</i></summary>
+      <div><p>{{ section.settings.detail_content }}</p></div>
+    </details>
+    <details class="product-info__item">
+      <summary><span>🚚</span>{{ section.settings.shipping_title }}<i aria-hidden="true">⌄</i></summary>
+      <div><p>{{ section.settings.shipping_content }}</p><a href="{{ shop.shipping_policy.url | default: '/policies/shipping-policy' }}">Read the shipping policy</a></div>
+    </details>
+    <details class="product-info__item">
+      <summary><span>🔄</span>{{ section.settings.refund_title }}<i aria-hidden="true">⌄</i></summary>
+      <div><p>{{ section.settings.refund_content }}</p><a href="{{ shop.refund_policy.url | default: '/policies/refund-policy' }}">Read the refund policy</a></div>
+    </details>
   </div>
 </section>
 
@@ -26,14 +20,12 @@
   "name": "Product information",
   "settings": [
     {"type": "text", "id": "detail_title", "label": "Detail heading", "default": "Product Details"},
-    {"type": "textarea", "id": "detail_content", "label": "Detail text", "default": "BeardMate delivers precision trimming with a built-in vacuum chamber to capture loose hairs while you groom. Includes two styling combs, USB charging cable, and travel lock."},
+    {"type": "textarea", "id": "detail_content", "label": "Detail text", "default": "BeardMate delivers precision trimming with a built-in vacuum chamber to capture loose hairs while you groom. Includes styling combs, USB charging cable, and cleaning brush."},
     {"type": "text", "id": "shipping_title", "label": "Shipping heading", "default": "Shipping & Delivery"},
-    {"type": "textarea", "id": "shipping_content", "label": "Shipping text", "default": "Free shipping on all orders. Delivery in 3-5 business days with tracking available for every order."},
+    {"type": "textarea", "id": "shipping_content", "label": "Shipping text", "default": "Orders are normally processed within 1–2 business days. Tracking is sent as soon as your BeardMate ships."},
     {"type": "text", "id": "refund_title", "label": "Return heading", "default": "Return & Refund Policy"},
-    {"type": "textarea", "id": "refund_content", "label": "Return text", "default": "30-day money-back guarantee. If you're not satisfied, return your item within 30 days for a full refund."}
+    {"type": "textarea", "id": "refund_content", "label": "Return text", "default": "Contact us within 30 days of delivery to request a return under the BeardMate satisfaction guarantee."}
   ],
-  "presets": [
-    {"name": "Product information", "category": "Homepage"}
-  ]
+  "presets": [{"name": "Product information"}]
 }
 {% endschema %}
