@@ -11,7 +11,7 @@
   <div class="container featured-product__grid">
     <div class="featured-product__media">
       {% if product_media != blank %}
-        {{ product_media | image_url: width: 1400 | image_tag: widths: '600, 900, 1200, 1400', sizes: '(min-width: 900px) 50vw, 100vw', loading: 'lazy', alt: featured_product.title | default: section.settings.fallback_title }}
+        {{ product_media | image_url: width: 1200, height: 1200, crop: 'center' | image_tag: widths: '360, 540, 720, 900, 1200', sizes: '(min-width: 900px) 520px, calc(100vw - 30px)', loading: 'lazy', alt: featured_product.title | default: section.settings.fallback_title }}
       {% else %}
         <img src="{{ 'hero-trimmer.svg' | asset_url }}" alt="{{ section.settings.fallback_title }}" width="760" height="560" loading="lazy">
       {% endif %}
@@ -42,11 +42,6 @@
       {% else %}
         <a class="reference-button" href="{{ routes.all_products_collection_url }}">{{ section.settings.fallback_button }}</a>
       {% endif %}
-      <div class="payment-trust-row">
-        <p>{{ section.settings.payment_heading }}</p>
-        <div>{% for type in shop.enabled_payment_types %}{{ type | payment_type_svg_tag }}{% endfor %}</div>
-      </div>
-      <ul class="product-assurances"><li>{{ section.settings.assurance_1 }}</li><li>{{ section.settings.assurance_2 }}</li><li>{{ section.settings.assurance_3 }}</li></ul>
     </div>
   </div>
 </section>
@@ -59,11 +54,7 @@
     {"type": "image_picker", "id": "image", "label": "Image override"},
     {"type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "BeardMate"},
     {"type": "text", "id": "fallback_title", "label": "Fallback title", "default": "BeardMate 2-in-1 Beard Trimmer with Built In Vacuum"},
-    {"type": "text", "id": "fallback_button", "label": "Fallback button", "default": "Shop the collection"},
-    {"type": "text", "id": "payment_heading", "label": "Payment heading", "default": "Checkout securely with"},
-    {"type": "text", "id": "assurance_1", "label": "Assurance 1", "default": "30-day guarantee"},
-    {"type": "text", "id": "assurance_2", "label": "Assurance 2", "default": "Premium quality"},
-    {"type": "text", "id": "assurance_3", "label": "Assurance 3", "default": "Fast shipping"}
+    {"type": "text", "id": "fallback_button", "label": "Fallback button", "default": "Shop the collection"}
   ],
   "presets": [{"name": "Homepage featured product"}]
 }

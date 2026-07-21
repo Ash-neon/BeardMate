@@ -14,7 +14,7 @@
         {% for item in collection_products limit: section.settings.product_limit %}
           <a class="routine-card" href="{{ item.url }}">
             <div class="routine-card__image">
-              {% if item.featured_image != blank %}{{ item.featured_image | image_url: width: 700 | image_tag: widths: '300, 500, 700', loading: 'lazy', alt: item.title }}{% else %}{{ 'product-1' | placeholder_svg_tag }}{% endif %}
+              {% if item.featured_image != blank %}{{ item.featured_image | image_url: width: 700, height: 700, crop: 'center' | image_tag: widths: '280, 420, 560, 700', sizes: '(min-width: 900px) 300px, calc(100vw - 58px)', loading: 'lazy', alt: item.title }}{% else %}{{ 'product-1' | placeholder_svg_tag }}{% endif %}
               {% if item.compare_at_price > item.price %}<span>{{ 'products.product.sale' | t }}</span>{% endif %}
             </div>
             <h3>{{ item.title }}</h3>

@@ -20,7 +20,7 @@
     </div>
     <div class="reference-hero__media">
       {% if hero_media != blank %}
-        {{ hero_media | image_url: width: 1600 | image_tag: widths: '600, 900, 1200, 1600', sizes: '(min-width: 900px) 52vw, 100vw', class: 'reference-hero__image', loading: 'eager', fetchpriority: 'high', alt: section.settings.heading }}
+        {{ hero_media | image_url: width: 1200, height: 1200, crop: 'center' | image_tag: widths: '360, 540, 720, 900, 1200', sizes: '(min-width: 900px) 600px, calc(100vw - 30px)', class: 'reference-hero__image', loading: 'eager', fetchpriority: 'high', alt: section.settings.heading }}
       {% else %}
         <img class="reference-hero__image" src="{{ 'hero-trimmer.svg' | asset_url }}" alt="BeardMate vacuum beard trimmer" width="760" height="560" fetchpriority="high">
       {% endif %}
