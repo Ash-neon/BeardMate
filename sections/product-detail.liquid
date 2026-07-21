@@ -1,7 +1,11 @@
 <section class="product-detail section-alt container">
   <div class="detail-grid">
     <div class="detail-media">
-      <img src="{{ section.settings.detail_image | asset_url }}" alt="{{ section.settings.detail_heading }}" />
+      {% if section.settings.detail_image != blank %}
+        {{ section.settings.detail_image | image_url: width: 1200 | image_tag: widths: '500, 800, 1000, 1200', alt: section.settings.detail_heading }}
+      {% else %}
+        <img src="{{ 'product-detail.svg' | asset_url }}" alt="{{ section.settings.detail_heading }}" width="720" height="420" loading="lazy">
+      {% endif %}
     </div>
     <div class="detail-copy">
       <p class="eyebrow">{{ section.settings.detail_eyebrow }}</p>
@@ -20,7 +24,7 @@
 {
   "name": "Product detail",
   "settings": [
-    {"type": "image_picker", "id": "detail_image", "label": "Detail image", "default": "product-detail.svg"},
+    {"type": "image_picker", "id": "detail_image", "label": "Detail image"},
     {"type": "text", "id": "detail_eyebrow", "label": "Eyebrow text", "default": "Professional grooming"},
     {"type": "text", "id": "detail_heading", "label": "Heading", "default": "Designed for every beard style"},
     {"type": "textarea", "id": "detail_text", "label": "Text", "default": "BeardMate is engineered to work on jawline, temples, chin, and neck areas with precision. The vacuum chamber collects hair while the dual-gear motor keeps the experience smooth and efficient."},

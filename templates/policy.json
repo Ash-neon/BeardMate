@@ -1,0 +1,8 @@
+{
+  "sections": {
+    "header": {"type": "site-header"},
+    "main": {"type": "main-policy"},
+    "footer": {"type": "footer"}
+  },
+  "order": ["header", "main", "footer"]
+}

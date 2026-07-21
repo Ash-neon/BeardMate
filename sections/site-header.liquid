@@ -1,0 +1,50 @@
+<div class="announcement" role="region" aria-label="Announcement">
+  <div class="container announcement__inner">
+    <span>{{ section.settings.announcement }}</span>
+    <span class="announcement__desktop">{{ section.settings.announcement_extra }}</span>
+  </div>
+</div>
+
+<header class="site-header" data-site-header>
+  <div class="container header-inner">
+    <a class="brand" href="{{ routes.root_url }}" aria-label="BeardMate home">
+      {% if section.settings.logo != blank %}
+        {{ section.settings.logo | image_url: width: 440 | image_tag: widths: '180, 220, 320, 440', class: 'brand__image', alt: shop.name }}
+      {% else %}
+        <span>BEARD</span><strong>MATE</strong>
+      {% endif %}
+    </a>
+
+    <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="primaryNavigation" data-menu-toggle>
+      <span class="sr-only">Toggle menu</span>
+      <span></span><span></span><span></span>
+    </button>
+
+    <nav class="primary-nav" id="primaryNavigation" aria-label="Primary navigation" data-mobile-nav>
+      <a href="{{ routes.root_url }}#why">Why BeardMate</a>
+      <a href="{{ routes.root_url }}#how-it-works">How it works</a>
+      <a href="{{ routes.root_url }}#reviews">Reviews</a>
+      <a href="{{ routes.root_url }}#faq">FAQ</a>
+    </nav>
+
+    <div class="header-actions">
+      <a class="header-cart" href="{{ routes.cart_url }}" aria-label="Cart with {{ cart.item_count }} items">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 4h2l2.1 10.2a2 2 0 0 0 2 1.6h7.8a2 2 0 0 0 2-1.6L20 8H7M10 20a1 1 0 1 1-2 0 1 1 0 0 1 2 0Zm8 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"/></svg>
+        <span class="cart-count">{{ cart.item_count }}</span>
+      </a>
+      <a class="btn btn--small btn--dark header-shop" href="{{ routes.root_url }}#shop-now">Get BeardMate</a>
+    </div>
+  </div>
+</header>
+
+{% schema %}
+{
+  "name": "Site header",
+  "settings": [
+    {"type": "image_picker", "id": "logo", "label": "Logo"},
+    {"type": "text", "id": "announcement", "label": "Announcement", "default": "Free tracked shipping on orders over $40"},
+    {"type": "text", "id": "announcement_extra", "label": "Second announcement", "default": "30-day clean-trim guarantee"}
+  ],
+  "presets": [{"name": "Site header"}]
+}
+{% endschema %}

@@ -1,19 +1,60 @@
+{% liquid
+  assign privacy_url = shop.privacy_policy.url | default: '/policies/privacy-policy'
+  assign refund_url = shop.refund_policy.url | default: '/policies/refund-policy'
+  assign shipping_url = shop.shipping_policy.url | default: '/policies/shipping-policy'
+%}
+
 <footer class="site-footer">
-  <div class="container footer-inner">
+  <div class="container footer-newsletter">
     <div>
-      <a href="#" class="logo-link footer-logo">
-        <img src="{{ section.settings.logo | asset_url }}" alt="{{ section.settings.brand_name }} logo" />
-      </a>
-      <p>{{ section.settings.description }}</p>
+      <p class="kicker">The five-minute read</p>
+      <h2>Better beard days, delivered.</h2>
     </div>
-    <div class="footer-links">
-      {% for link in section.blocks %}
-        <a href="{{ link.settings.link_url }}">{{ link.settings.link_text }}</a>
-      {% endfor %}
-    </div>
+    {% form 'customer', class: 'newsletter-form' %}
+      <input type="hidden" name="contact[tags]" value="newsletter">
+      <label class="sr-only" for="FooterEmail-{{ section.id }}">Email address</label>
+      <input id="FooterEmail-{{ section.id }}" type="email" name="contact[email]" value="{{ form.email }}" placeholder="Email address" autocomplete="email" required>
+      <button type="submit">Join the list <span aria-hidden="true">→</span></button>
+      {% if form.posted_successfully? %}<p class="form-message" role="status">You’re in. Check your inbox soon.</p>{% endif %}
+      {% if form.errors %}<div class="form-message form-message--error" role="alert">{{ form.errors | default_errors }}</div>{% endif %}
+    {% endform %}
   </div>
+
+  <div class="container footer-main">
+    <div class="footer-brand">
+      <a class="brand brand--footer" href="{{ routes.root_url }}" aria-label="BeardMate home"><span>BEARD</span><strong>MATE</strong></a>
+      <p>{{ section.settings.description }}</p>
+      <a class="footer-email" href="mailto:{{ shop.email | default: 'hello@beardmate.com' }}">{{ shop.email | default: 'hello@beardmate.com' }}</a>
+    </div>
+
+    <nav class="footer-column" aria-label="Shop">
+      <h3>Shop</h3>
+      <a href="{{ routes.root_url }}#shop-now">Vacuum trimmer</a>
+      <a href="{{ routes.all_products_collection_url }}">All products</a>
+      <a href="{{ routes.cart_url }}">Your cart</a>
+      <a href="{{ routes.root_url }}#reviews">Reviews</a>
+    </nav>
+
+    <nav class="footer-column" aria-label="Support">
+      <h3>Support</h3>
+      <a href="{{ routes.root_url }}#faq">FAQ</a>
+      <a href="mailto:{{ shop.email | default: 'hello@beardmate.com' }}">Contact us</a>
+      <a href="{{ shipping_url }}">Shipping policy</a>
+      <a href="{{ refund_url }}">Refund policy</a>
+    </nav>
+
+    <nav class="footer-column" aria-label="Legal">
+      <h3>Legal</h3>
+      <a href="{{ privacy_url }}">Privacy policy</a>
+      {% if shop.terms_of_service.url != blank %}<a href="{{ shop.terms_of_service.url }}">Terms of service</a>{% endif %}
+      {% if section.settings.instagram_url != blank %}<a href="{{ section.settings.instagram_url }}" target="_blank" rel="noopener">Instagram ↗</a>{% endif %}
+      {% if section.settings.tiktok_url != blank %}<a href="{{ section.settings.tiktok_url }}" target="_blank" rel="noopener">TikTok ↗</a>{% endif %}
+    </nav>
+  </div>
+
   <div class="container footer-bottom">
-    <p>© <span id="year"></span> {{ section.settings.footer_text }}</p>
+    <p>© <span data-current-year>{{ 'now' | date: '%Y' }}</span> {{ shop.name | default: 'BeardMate' }}. All rights reserved.</p>
+    <p>Designed for better beard days.</p>
   </div>
 </footer>
 
@@ -21,23 +62,10 @@
 {
   "name": "Footer",
   "settings": [
-    {"type": "image_picker", "id": "logo", "label": "Footer logo", "default": "logo.svg"},
-    {"type": "text", "id": "brand_name", "label": "Brand name", "default": "BeardMate"},
-    {"type": "textarea", "id": "description", "label": "Footer description", "default": "BeardMate provides modern grooming tools and beard care products designed to help men maintain a clean, sharp, and confident look every day."},
-    {"type": "text", "id": "footer_text", "label": "Footer text", "default": "BeardMate · Powered by Shopify"}
+    {"type": "textarea", "id": "description", "label": "Brand description", "default": "Smarter grooming tools for sharp beards, clean counters, and mornings that move."},
+    {"type": "url", "id": "instagram_url", "label": "Instagram URL"},
+    {"type": "url", "id": "tiktok_url", "label": "TikTok URL"}
   ],
-  "blocks": [
-    {
-      "type": "link",
-      "name": "Footer link",
-      "settings": [
-        {"type": "url", "id": "link_url", "label": "Link URL", "default": "#home"},
-        {"type": "text", "id": "link_text", "label": "Link text", "default": "Home"}
-      ]
-    }
-  ],
-  "presets": [
-    {"name": "Footer", "category": "Footer"}
-  ]
+  "presets": [{"name": "Footer"}]
 }
 {% endschema %}

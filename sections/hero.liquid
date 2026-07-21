@@ -1,41 +1,46 @@
+{% liquid
+  assign active_product = product
+  assign active_variant = active_product.selected_or_first_available_variant
+%}
+
 <section class="product-hero">
   <div class="container hero-grid">
     <div class="product-media">
       <div class="product-image-wrap">
-        <img id="productMainImage" src="{{ section.settings.hero_image | asset_url }}" alt="{{ section.settings.heading }}" />
+        {% if section.settings.hero_image != blank %}
+          {{ section.settings.hero_image | image_url: width: 1200 | image_tag: id: 'productMainImage', widths: '500, 800, 1000, 1200', alt: active_product.title }}
+        {% elsif active_product.featured_image != blank %}
+          {{ active_product.featured_image | image_url: width: 1200 | image_tag: id: 'productMainImage', widths: '500, 800, 1000, 1200', alt: active_product.title }}
+        {% else %}
+          <img id="productMainImage" src="{{ 'hero-trimmer.svg' | asset_url }}" alt="BeardMate vacuum beard trimmer" width="760" height="560">
+        {% endif %}
       </div>
-      <div class="product-thumbnails">
-        <button class="thumb active" data-image="{{ section.settings.thumbnail_image_1 | asset_url }}" aria-label="Product thumbnail">
-          <img src="{{ section.settings.thumbnail_image_1 | asset_url }}" alt="Thumbnail 1" />
-        </button>
-        <button class="thumb" data-image="{{ section.settings.thumbnail_image_2 | asset_url }}" aria-label="Product thumbnail">
-          <img src="{{ section.settings.thumbnail_image_2 | asset_url }}" alt="Thumbnail 2" />
-        </button>
-        <button class="thumb" data-image="{{ section.settings.thumbnail_image_3 | asset_url }}" aria-label="Product thumbnail">
-          <img src="{{ section.settings.thumbnail_image_3 | asset_url }}" alt="Thumbnail 3" />
-        </button>
-        <button class="thumb" data-image="{{ section.settings.thumbnail_image_4 | asset_url }}" aria-label="Product thumbnail">
-          <img src="{{ section.settings.thumbnail_image_4 | asset_url }}" alt="Thumbnail 4" />
-        </button>
-      </div>
+      {% if active_product.images.size > 1 %}
+        <div class="product-thumbnails" aria-label="Product images">
+          {% for image in active_product.images limit: 4 %}
+            <button class="thumb{% if forloop.first %} active{% endif %}" type="button" data-image="{{ image | image_url: width: 1200 }}" aria-label="Show product image {{ forloop.index }}">
+              {{ image | image_url: width: 240 | image_tag: alt: image.alt }}
+            </button>
+          {% endfor %}
+        </div>
+      {% endif %}
     </div>
 
     <div class="product-copy">
-      <p class="eyebrow">{{ section.settings.eyebrow_text }}</p>
-      <h1>{{ section.settings.heading }}</h1>
-      <div class="rating-row">
-        <span class="stars">{{ section.settings.rating_stars }}</span>
-        <span class="reviews">{{ section.settings.review_count }}</span>
-      </div>
-      <p class="lead">{{ section.settings.lead_text }}</p>
+      <p class="eyebrow"><span></span>{{ section.settings.eyebrow_text }}</p>
+      <h1>{{ active_product.title | default: section.settings.heading }}</h1>
+      <div class="rating-row"><span class="stars" aria-hidden="true">★★★★★</span><strong>4.9</strong><span>{{ section.settings.review_count }}</span></div>
+      <p class="hero__lead">{{ active_product.description | strip_html | truncatewords: 28 | default: section.settings.lead_text }}</p>
 
-      <div class="price-row">
-        <span class="price-old">{{ section.settings.price_old }}</span>
-        <span class="price-now">{{ section.settings.price_now }}</span>
-        <span class="badge sale">{{ section.settings.badge_text }}</span>
+      <div class="hero__price">
+        {% if active_product != blank %}
+          <span class="price-now">{{ active_variant.price | money }}</span>
+          {% if active_variant.compare_at_price > active_variant.price %}<span class="price-old">{{ active_variant.compare_at_price | money }}</span>{% endif %}
+        {% else %}
+          <span class="price-now">{{ section.settings.price_now }}</span><span class="price-old">{{ section.settings.price_old }}</span>
+        {% endif %}
+        <span class="price-chip">{{ section.settings.badge_text }}</span>
       </div>
-
-      <p class="shop-pay">{{ section.settings.shop_pay_text }} <a href="{{ section.settings.shop_pay_link }}">{{ section.settings.shop_pay_link_text }}</a></p>
 
       <ul class="benefits-list">
         <li>{{ section.settings.benefit_item_1 }}</li>
@@ -44,8 +49,15 @@
       </ul>
 
       <div class="actions-row">
-        <button class="btn btn-primary large">{{ section.settings.cta_primary }}</button>
-        <button class="btn btn-secondary">{{ section.settings.cta_secondary }}</button>
+        {% if active_product != blank %}
+          {% form 'product', active_product, id: 'ProductPageForm' %}
+            <input type="hidden" name="id" value="{{ active_variant.id }}">
+            <button class="btn btn--lime" type="submit" name="add" {% unless active_variant.available %}disabled{% endunless %}>{% if active_variant.available %}{{ section.settings.cta_primary }}{% else %}Sold out{% endif %}</button>
+          {% endform %}
+        {% else %}
+          <a class="btn btn--lime" href="{{ routes.all_products_collection_url }}">{{ section.settings.cta_primary }}</a>
+        {% endif %}
+        <button class="btn btn-secondary" type="button" data-share>{{ section.settings.cta_secondary }}</button>
       </div>
     </div>
   </div>
@@ -53,32 +65,22 @@
 
 {% schema %}
 {
-  "name": "Homepage hero",
+  "name": "Product hero",
   "settings": [
-    {"type": "image_picker", "id": "hero_image", "label": "Hero image", "default": "hero-trimmer.svg"},
+    {"type": "image_picker", "id": "hero_image", "label": "Hero image override"},
     {"type": "text", "id": "eyebrow_text", "label": "Eyebrow text", "default": "BeardMate"},
-    {"type": "text", "id": "heading", "label": "Heading", "default": "BeardMate 2-in-1 Beard Trimmer with Built In Vacuum"},
-    {"type": "textarea", "id": "lead_text", "label": "Lead text", "default": "Mess-free beard trimming starts here."},
-    {"type": "text", "id": "rating_stars", "label": "Rating stars", "default": "★★★★★"},
-    {"type": "text", "id": "review_count", "label": "Review count text", "default": "2,436 reviews"},
-    {"type": "text", "id": "price_old", "label": "Old price", "default": "$49.99 USD"},
-    {"type": "text", "id": "price_now", "label": "Current price", "default": "$34.99 USD"},
-    {"type": "text", "id": "badge_text", "label": "Badge text", "default": "Sale"},
-    {"type": "text", "id": "shop_pay_text", "label": "Shop pay text", "default": "Pay over time for orders over $35.00 with shop Pay"},
-    {"type": "text", "id": "shop_pay_link_text", "label": "Shop pay link text", "default": "Learn more"},
-    {"type": "url", "id": "shop_pay_link", "label": "Shop pay link URL", "default": "#learn"},
+    {"type": "text", "id": "heading", "label": "Fallback heading", "default": "BeardMate 2-in-1 Vacuum Trimmer"},
+    {"type": "textarea", "id": "lead_text", "label": "Fallback description", "default": "Mess-free beard trimming starts here."},
+    {"type": "text", "id": "review_count", "label": "Review count text", "default": "2,400+ reviews"},
+    {"type": "text", "id": "price_old", "label": "Fallback old price", "default": "$75.00"},
+    {"type": "text", "id": "price_now", "label": "Fallback price", "default": "$49.00"},
+    {"type": "text", "id": "badge_text", "label": "Badge text", "default": "Save 35%"},
     {"type": "text", "id": "benefit_item_1", "label": "Benefit 1", "default": "No more messy sink cleanup"},
-    {"type": "text", "id": "benefit_item_2", "label": "Benefit 2", "default": "Built-in vacuum catches every hair"},
-    {"type": "text", "id": "benefit_item_3", "label": "Benefit 3", "default": "Rechargeable and travel friendly"},
+    {"type": "text", "id": "benefit_item_2", "label": "Benefit 2", "default": "Built-in vacuum captures trimmed hair"},
+    {"type": "text", "id": "benefit_item_3", "label": "Benefit 3", "default": "Rechargeable and travel ready"},
     {"type": "text", "id": "cta_primary", "label": "Primary CTA", "default": "Add to cart"},
-    {"type": "text", "id": "cta_secondary", "label": "Secondary CTA", "default": "Share"},
-    {"type": "image_picker", "id": "thumbnail_image_1", "label": "Thumbnail image 1", "default": "hero-trimmer.svg"},
-    {"type": "image_picker", "id": "thumbnail_image_2", "label": "Thumbnail image 2", "default": "before-after.svg"},
-    {"type": "image_picker", "id": "thumbnail_image_3", "label": "Thumbnail image 3", "default": "gallery-1.svg"},
-    {"type": "image_picker", "id": "thumbnail_image_4", "label": "Thumbnail image 4", "default": "gallery-2.svg"}
+    {"type": "text", "id": "cta_secondary", "label": "Secondary CTA", "default": "Share"}
   ],
-  "presets": [
-    {"name": "Homepage hero", "category": "Homepage"}
-  ]
+  "presets": [{"name": "Product hero"}]
 }
 {% endschema %}

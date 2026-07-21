@@ -1,22 +1,10 @@
 {
   "sections": {
-    "hero": {
-      "type": "hero"
-    },
-    "product-detail": {
-      "type": "product-detail"
-    },
-    "features-list": {
-      "type": "features-list"
-    },
-    "footer": {
-      "type": "footer"
-    }
+    "header": {"type": "site-header"},
+    "hero": {"type": "hero"},
+    "details": {"type": "product-detail"},
+    "features": {"type": "features-list"},
+    "footer": {"type": "footer"}
   },
-  "order": [
-    "hero",
-    "product-detail",
-    "features-list",
-    "footer"
-  ]
+  "order": ["header", "hero", "details", "features", "footer"]
 }

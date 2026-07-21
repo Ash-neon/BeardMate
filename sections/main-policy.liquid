@@ -1,0 +1,80 @@
+{% liquid
+  assign policy_title = 'Store policy'
+  assign policy_body = blank
+  assign policy_type = 'policy'
+  if request.path contains 'privacy-policy'
+    assign policy_title = 'Privacy policy'
+    assign policy_body = shop.privacy_policy.body
+    assign policy_type = 'privacy'
+  elsif request.path contains 'refund-policy'
+    assign policy_title = 'Refund policy'
+    assign policy_body = shop.refund_policy.body
+    assign policy_type = 'refund'
+  elsif request.path contains 'shipping-policy'
+    assign policy_title = 'Shipping policy'
+    assign policy_body = shop.shipping_policy.body
+    assign policy_type = 'shipping'
+  elsif request.path contains 'terms-of-service'
+    assign policy_title = 'Terms of service'
+    assign policy_body = shop.terms_of_service.body
+    assign policy_type = 'terms'
+  endif
+%}
+
+<section class="policy-hero">
+  <div class="container policy-hero__inner">
+    <p class="kicker">BeardMate policies</p>
+    <h1>{{ policy_title }}</h1>
+    <p>Clear terms, plain language, no fine-print surprises.</p>
+  </div>
+</section>
+
+<section class="policy-section">
+  <div class="container policy-layout">
+    <aside class="policy-nav">
+      <p>Policies</p>
+      <a href="{{ shop.privacy_policy.url | default: '/policies/privacy-policy' }}" {% if policy_type == 'privacy' %}aria-current="page"{% endif %}>Privacy</a>
+      <a href="{{ shop.refund_policy.url | default: '/policies/refund-policy' }}" {% if policy_type == 'refund' %}aria-current="page"{% endif %}>Refunds</a>
+      <a href="{{ shop.shipping_policy.url | default: '/policies/shipping-policy' }}" {% if policy_type == 'shipping' %}aria-current="page"{% endif %}>Shipping</a>
+    </aside>
+    <article class="policy-content rte">
+      <p class="policy-updated">Last updated: July 21, 2026</p>
+      {% if policy_body != blank %}
+        {{ policy_body }}
+      {% elsif policy_type == 'privacy' %}
+        <h2>Information we collect</h2>
+        <p>When you visit or make a purchase, we may collect contact, order, payment, device, and browsing information needed to operate the store and fulfill your order. Payment information is processed by our payment providers and is not stored in full by BeardMate.</p>
+        <h2>How we use information</h2>
+        <p>We use information to process purchases, deliver orders, provide support, prevent fraud, improve our store, and send marketing only where you have chosen to receive it.</p>
+        <h2>Sharing and your choices</h2>
+        <p>We share information only with service providers that help us run the store, meet legal obligations, or protect our rights. Depending on your location, you may request access, correction, or deletion of personal information.</p>
+        <h2>Contact</h2>
+        <p>For privacy questions or requests, email <a href="mailto:{{ shop.email | default: 'hello@beardmate.com' }}">{{ shop.email | default: 'hello@beardmate.com' }}</a>.</p>
+      {% elsif policy_type == 'refund' %}
+        <h2>30-day return window</h2>
+        <p>You may request a return within 30 days of delivery. Items must be returned with their original accessories and packaging. For hygiene reasons, used grooming products may only be eligible when defective or covered by our satisfaction guarantee.</p>
+        <h2>Starting a return</h2>
+        <p>Email <a href="mailto:{{ shop.email | default: 'hello@beardmate.com' }}">{{ shop.email | default: 'hello@beardmate.com' }}</a> with your order number and reason for return. Do not send an item back before receiving return instructions.</p>
+        <h2>Refund timing</h2>
+        <p>Approved refunds are issued to the original payment method after inspection. Your bank or card provider may need additional time to post the credit.</p>
+        <h2>Damaged or incorrect orders</h2>
+        <p>Contact us as soon as possible with photographs of the package and product so we can make it right.</p>
+      {% elsif policy_type == 'shipping' %}
+        <h2>Order processing</h2>
+        <p>Orders are normally processed within 1–2 business days, excluding weekends and holidays. You will receive a confirmation email followed by tracking when the carrier accepts your parcel.</p>
+        <h2>Estimated delivery</h2>
+        <p>Standard delivery generally takes 3–7 business days after dispatch. Carrier delays, weather, customs, or peak-season volume may affect these estimates.</p>
+        <h2>Address changes and tracking</h2>
+        <p>Contact us immediately if your shipping address is incorrect. Once an order has shipped, changes may not be possible. Please allow up to 48 hours for tracking scans to appear.</p>
+        <h2>Lost or damaged parcels</h2>
+        <p>If tracking has not updated for seven business days or your order arrives damaged, email <a href="mailto:{{ shop.email | default: 'hello@beardmate.com' }}">{{ shop.email | default: 'hello@beardmate.com' }}</a> with your order number.</p>
+      {% else %}
+        <p>This policy has not been configured yet. Please contact <a href="mailto:{{ shop.email | default: 'hello@beardmate.com' }}">{{ shop.email | default: 'hello@beardmate.com' }}</a> for help.</p>
+      {% endif %}
+    </article>
+  </div>
+</section>
+
+{% schema %}
+{"name": "Policy page", "settings": [], "presets": [{"name": "Policy page"}]}
+{% endschema %}
