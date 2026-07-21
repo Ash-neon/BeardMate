@@ -1,0 +1,18 @@
+{
+  "sections": {
+    "hero": {
+      "type": "hero"
+    },
+    "features-list": {
+      "type": "features-list"
+    },
+    "footer": {
+      "type": "footer"
+    }
+  },
+  "order": [
+    "hero",
+    "features-list",
+    "footer"
+  ]
+}

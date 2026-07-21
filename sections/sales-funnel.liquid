@@ -1,0 +1,176 @@
+<section class="product-hero">
+  <div class="container hero-grid">
+    <div class="product-media">
+      <div class="product-image-wrap">
+        <img src="{{ section.settings.hero_image | asset_url }}" alt="{{ section.settings.hero_headline }}" />
+      </div>
+    </div>
+
+    <div class="product-copy">
+      <p class="eyebrow">{{ section.settings.eyebrow_text }}</p>
+      <h1>{{ section.settings.hero_headline }}</h1>
+      <p class="lead">{{ section.settings.hero_subheadline }}</p>
+
+      <div class="price-row">
+        <span class="price-old">{{ section.settings.price_old }}</span>
+        <span class="price-now">{{ section.settings.price_now }}</span>
+        <span class="badge sale">{{ section.settings.badge_text }}</span>
+      </div>
+
+      <div class="actions-row">
+        <a href="{{ section.settings.primary_button_url }}" class="btn btn-primary large">{{ section.settings.primary_button_text }}</a>
+        <a href="{{ section.settings.secondary_button_url }}" class="btn btn-secondary">{{ section.settings.secondary_button_text }}</a>
+      </div>
+
+      <ul class="benefits-list">
+        <li>{{ section.settings.benefit_item_1 }}</li>
+        <li>{{ section.settings.benefit_item_2 }}</li>
+        <li>{{ section.settings.benefit_item_3 }}</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="product-detail section-alt container">
+  <div class="detail-grid">
+    <div class="detail-copy">
+      <p class="eyebrow">{{ section.settings.detail_eyebrow }}</p>
+      <h2>{{ section.settings.detail_heading }}</h2>
+      <p>{{ section.settings.detail_text }}</p>
+      <ul class="detail-list">
+        <li>{{ section.settings.detail_bullet_1 }}</li>
+        <li>{{ section.settings.detail_bullet_2 }}</li>
+        <li>{{ section.settings.detail_bullet_3 }}</li>
+      </ul>
+    </div>
+    <div class="detail-media">
+      <img src="{{ section.settings.detail_image | asset_url }}" alt="{{ section.settings.detail_heading }}" />
+    </div>
+  </div>
+</section>
+
+<section class="feature-list container">
+  <h2>{{ section.settings.feature_list_heading }}</h2>
+  <div class="feature-grid">
+    <article>
+      <h3>{{ section.settings.feature_1_title }}</h3>
+      <p>{{ section.settings.feature_1_copy }}</p>
+    </article>
+    <article>
+      <h3>{{ section.settings.feature_2_title }}</h3>
+      <p>{{ section.settings.feature_2_copy }}</p>
+    </article>
+    <article>
+      <h3>{{ section.settings.feature_3_title }}</h3>
+      <p>{{ section.settings.feature_3_copy }}</p>
+    </article>
+    <article>
+      <h3>{{ section.settings.feature_4_title }}</h3>
+      <p>{{ section.settings.feature_4_copy }}</p>
+    </article>
+  </div>
+</section>
+
+<section class="testimonials container">
+  <h2>{{ section.settings.testimonial_heading }}</h2>
+  <div class="testimonials-grid">
+    {% for block in section.blocks %}
+      <article>
+        <img src="{{ block.settings.image | asset_url }}" alt="{{ block.settings.name }}" />
+        <p>{{ block.settings.quote }}</p>
+        <span>{{ block.settings.name }}</span>
+      </article>
+    {% endfor %}
+  </div>
+</section>
+
+<section class="faq section-alt">
+  <div class="container faq-grid">
+    <h2>{{ section.settings.faq_heading }}</h2>
+    {% for block in section.blocks %}
+      <div class="faq-item">
+        <button class="faq-button" aria-expanded="false">{{ block.settings.question }}</button>
+        <div class="faq-panel">{{ block.settings.answer }}</div>
+      </div>
+    {% endfor %}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Sales funnel homepage",
+  "settings": [
+    {"type": "image_picker", "id": "hero_image", "label": "Hero image", "default": "hero-trimmer.svg"},
+    {"type": "text", "id": "eyebrow_text", "label": "Hero eyebrow", "default": "BeardMate"},
+    {"type": "text", "id": "hero_headline", "label": "Hero headline", "default": "The Only Beard Trimmer with Built-In Vacuum"},
+    {"type": "textarea", "id": "hero_subheadline", "label": "Hero subheadline", "default": "Trim faster, clean easier, and get a sharper look without the mess."},
+    {"type": "text", "id": "price_old", "label": "Old price", "default": "$79.99 USD"},
+    {"type": "text", "id": "price_now", "label": "Sale price", "default": "$39.99 USD"},
+    {"type": "text", "id": "badge_text", "label": "Badge text", "default": "Limited Offer"},
+    {"type": "text", "id": "primary_button_text", "label": "Primary CTA text", "default": "Shop Now"},
+    {"type": "url", "id": "primary_button_url", "label": "Primary CTA URL", "default": "/products/beardmate-2-in-1-trimmer"},
+    {"type": "text", "id": "secondary_button_text", "label": "Secondary CTA text", "default": "Learn More"},
+    {"type": "url", "id": "secondary_button_url", "label": "Secondary CTA URL", "default": "#why-it-works"},
+    {"type": "text", "id": "benefit_item_1", "label": "Benefit 1", "default": "No more sink cleanup"},
+    {"type": "text", "id": "benefit_item_2", "label": "Benefit 2", "default": "Built-in vacuum captures every hair"},
+    {"type": "text", "id": "benefit_item_3", "label": "Benefit 3", "default": "USB rechargeable and travel-ready"},
+    {"type": "text", "id": "detail_eyebrow", "label": "Detail eyebrow", "default": "Why it works"},
+    {"type": "text", "id": "detail_heading", "label": "Detail heading", "default": "Everything you need for a cleaner trim"},
+    {"type": "textarea", "id": "detail_text", "label": "Detail text", "default": "The BeardMate trimmer combines a powerful blade, vacuum capture, and waterproof design so you can groom with confidence every day."},
+    {"type": "image_picker", "id": "detail_image", "label": "Detail image", "default": "product-detail.svg"},
+    {"type": "text", "id": "detail_bullet_1", "label": "Detail bullet 1", "default": "Quick empty chamber release"},
+    {"type": "text", "id": "detail_bullet_2", "label": "Detail bullet 2", "default": "Compact travel-friendly design"},
+    {"type": "text", "id": "detail_bullet_3", "label": "Detail bullet 3", "default": "Precision trimming for jawlines and chin"},
+    {"type": "text", "id": "feature_list_heading", "label": "Feature list heading", "default": "Trusted by thousands"},
+    {"type": "text", "id": "feature_1_title", "label": "Feature 1 title", "default": "Mess-Free Grooming"},
+    {"type": "textarea", "id": "feature_1_copy", "label": "Feature 1 copy", "default": "Collect trimmed hairs while you shave to keep your bathroom clean."},
+    {"type": "text", "id": "feature_2_title", "label": "Feature 2 title", "default": "Fast, Powerful Motor"},
+    {"type": "textarea", "id": "feature_2_copy", "label": "Feature 2 copy", "default": "A dual-gear motor delivers consistent trim performance on all beard types."},
+    {"type": "text", "id": "feature_3_title", "label": "Feature 3 title", "default": "Waterproof Cleaning"},
+    {"type": "textarea", "id": "feature_3_copy", "label": "Feature 3 copy", "default": "Rinse the trimmer under water after use and keep it ready for the next session."},
+    {"type": "text", "id": "feature_4_title", "label": "Feature 4 title", "default": "Travel Ready"},
+    {"type": "textarea", "id": "feature_4_copy", "label": "Feature 4 copy", "default": "Recharge anywhere with USB charging before your next trip."},
+    {"type": "text", "id": "testimonial_heading", "label": "Testimonial heading", "default": "Real reviews from real buyers"},
+    {"type": "text", "id": "faq_heading", "label": "FAQ heading", "default": "Frequently Asked Questions"}
+  ],
+  "blocks": [
+    {
+      "type": "testimonial",
+      "name": "Testimonial",
+      "settings": [
+        {"type": "image_picker", "id": "image", "label": "Testimonial image", "default": "gallery-3.svg"},
+        {"type": "text", "id": "quote", "label": "Quote", "default": "Best trimmer I’ve used — no mess and great finish."},
+        {"type": "text", "id": "name", "label": "Name", "default": "Mike J."}
+      ]
+    },
+    {
+      "type": "testimonial",
+      "name": "Testimonial",
+      "settings": [
+        {"type": "image_picker", "id": "image", "label": "Testimonial image", "default": "gallery-1.svg"},
+        {"type": "text", "id": "quote", "label": "Quote", "default": "This makes trimming so much easier and cleaner."},
+        {"type": "text", "id": "name", "label": "Name", "default": "Avery H."}
+      ]
+    },
+    {
+      "type": "faq_item",
+      "name": "FAQ item",
+      "settings": [
+        {"type": "text", "id": "question", "label": "Question", "default": "Does the vacuum actually collect hair?"},
+        {"type": "textarea", "id": "answer", "label": "Answer", "default": "Yes — the vacuum chamber pulls trimmed hair into the onboard reservoir."}
+      ]
+    },
+    {
+      "type": "faq_item",
+      "name": "FAQ item",
+      "settings": [
+        {"type": "text", "id": "question", "label": "Question", "default": "Can I use it on thick beards?"},
+        {"type": "textarea", "id": "answer", "label": "Answer", "default": "Yes — it works well on thick, coarse beard hair with no drag."}
+      ]
+    }
+  ],
+  "presets": [
+    {"name": "Sales funnel", "category": "Homepage"}
+  ]
+}
+{% endschema %}
