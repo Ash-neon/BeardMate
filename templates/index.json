@@ -1,15 +1,65 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "main": {
       "type": "sales-funnel",
       "blocks": {
-        "faq_1": {"type": "faq", "settings": {"question": "Does it really catch all the hair?", "answer": "The built-in vacuum is designed to capture most trimmed hairs as you groom. A few strays can happen depending on technique and hair length, but cleanup is dramatically reduced."}},
-        "faq_2": {"type": "faq", "settings": {"question": "What beard lengths can I trim?", "answer": "The included guide combs cover everyday stubble through a fuller short beard. Use the bare blade for crisp cheek, neck, and mustache lines."}},
-        "faq_3": {"type": "faq", "settings": {"question": "Can I rinse the whole trimmer?", "answer": "The body is water-resistant for easy rinsing. Empty the chamber first, keep the charging port closed, and allow the trimmer to dry fully before charging."}},
-        "faq_4": {"type": "faq", "settings": {"question": "What if BeardMate is not for me?", "answer": "Contact us within 30 days of delivery. Our support team will walk you through the return process under the refund policy linked below."}}
+        "faq_1": {
+          "type": "faq",
+          "settings": {
+            "question": "Does it really catch all the hair?",
+            "answer": "The built-in vacuum is designed to capture most trimmed hairs as you groom. A few strays can happen depending on technique and hair length, but cleanup is dramatically reduced."
+          }
+        },
+        "faq_2": {
+          "type": "faq",
+          "settings": {
+            "question": "What beard lengths can I trim?",
+            "answer": "The included guide combs cover everyday stubble through a fuller short beard. Use the bare blade for crisp cheek, neck, and mustache lines."
+          }
+        },
+        "faq_3": {
+          "type": "faq",
+          "settings": {
+            "question": "Can I rinse the whole trimmer?",
+            "answer": "The body is water-resistant for easy rinsing. Empty the chamber first, keep the charging port closed, and allow the trimmer to dry fully before charging."
+          }
+        },
+        "faq_4": {
+          "type": "faq",
+          "settings": {
+            "question": "What if BeardMate is not for me?",
+            "answer": "Contact us within 30 days of delivery. Our support team will walk you through the return process under the refund policy linked below."
+          }
+        }
       },
-      "block_order": ["faq_1", "faq_2", "faq_3", "faq_4"]
+      "block_order": [
+        "faq_1",
+        "faq_2",
+        "faq_3",
+        "faq_4"
+      ],
+      "settings": {
+        "product": "beardmate-2-in-1-beard-trimmer-with-built-in-vacuum",
+        "collection": "",
+        "heading": "Trim Clean. Groom Smart.",
+        "subheading": "Meet the BeardMate vacuum beard trimmer, designed to capture trimmed hairs as you shave while delivering precise, professional beard styling at home.",
+        "hero_benefit_1": "30-Day Money-Back Guarantee",
+        "hero_benefit_2": "Tracked Shipping Available",
+        "story_heading": "Finally, A Trimmer That Keeps The Sink Clean",
+        "product_name": "BeardMate 2-in-1 Beard Trimmer with Built In Vacuum"
+      }
     }
   },
-  "order": ["main"]
+  "order": [
+    "main"
+  ]
 }
