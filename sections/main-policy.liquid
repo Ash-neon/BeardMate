@@ -155,8 +155,9 @@
 
       <div class="policy-contact-card">
         <h2>Contact BeardMate</h2>
-        <p>Customer support is available through our secure contact form.</p>
+        <p>BeardMate is owned and operated by {{ legal_name }}. Customer support is available using the details below or through our secure contact form.</p>
         {% if settings.support_phone != blank %}<p>Phone: <a href="tel:{{ settings.support_phone | remove: ' ' | remove: '(' | remove: ')' | remove: '-' }}">{{ settings.support_phone }}</a></p>{% endif %}
+        {% if settings.support_email != blank %}<p>Email: <a href="mailto:{{ settings.support_email | escape }}">{{ settings.support_email }}</a></p>{% endif %}
         {% if settings.business_address != blank %}<p>Business address:</p><address>{{ settings.business_address | newline_to_br }}</address>{% endif %}
         <p><a href="{{ pages.contact.url | default: '/pages/contact' }}">Open the BeardMate contact page</a></p>
       </div>

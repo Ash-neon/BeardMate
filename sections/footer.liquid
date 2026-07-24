@@ -29,6 +29,7 @@
       <p class="footer-legal-entity">BeardMate is owned and operated by {{ legal_name }}.</p>
       <a href="{{ pages.contact.url | default: '/pages/contact' }}">Contact customer care</a>
       {% if settings.support_phone != blank %}<a href="tel:{{ settings.support_phone | remove: ' ' | remove: '(' | remove: ')' | remove: '-' }}">{{ settings.support_phone }}</a>{% endif %}
+      {% if settings.support_email != blank %}<a href="mailto:{{ settings.support_email | escape }}">{{ settings.support_email }}</a>{% endif %}
       {% if settings.business_address != blank %}<address>{{ settings.business_address | newline_to_br }}</address>{% endif %}
     </div>
   </div>

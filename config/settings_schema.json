@@ -21,6 +21,12 @@
         "info": "Displayed on the contact page, footer, and policy pages."
       },
       {
+        "type": "text",
+        "id": "support_email",
+        "label": "Public customer support email",
+        "info": "Displayed on the contact page, footer, and policy pages."
+      },
+      {
         "type": "textarea",
         "id": "returns_address",
         "label": "Authorized returns address",
