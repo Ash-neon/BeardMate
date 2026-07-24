@@ -1,1 +1,43 @@
-[]
+[
+  {
+    "name": "Business information",
+    "settings": [
+      {
+        "type": "text",
+        "id": "legal_business_name",
+        "label": "Legal business name",
+        "default": "ChaliseyZ Central L.L.C."
+      },
+      {
+        "type": "textarea",
+        "id": "business_address",
+        "label": "Full public street address",
+        "info": "Required for merchant verification. Include street, unit (if applicable), city, state or province, postal code, and country."
+      },
+      {
+        "type": "text",
+        "id": "support_phone",
+        "label": "Public customer support phone",
+        "info": "Displayed on the contact page, footer, and policy pages."
+      },
+      {
+        "type": "textarea",
+        "id": "returns_address",
+        "label": "Authorized returns address",
+        "info": "Optional. Leave blank if customers must request return instructions first."
+      },
+      {
+        "type": "text",
+        "id": "shipping_processing",
+        "label": "Order processing estimate",
+        "default": "1–3 business days"
+      },
+      {
+        "type": "text",
+        "id": "shipping_delivery",
+        "label": "Standard delivery estimate",
+        "default": "3–8 business days after dispatch"
+      }
+    ]
+  }
+]

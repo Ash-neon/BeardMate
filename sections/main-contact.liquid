@@ -13,15 +13,19 @@
 <section class="contact-section">
   <div class="container contact-grid">
     <aside class="business-contact-card">
+      <p class="reference-eyebrow">Business contact information</p>
       <h2>{{ legal_name }}</h2>
-      <p>Owner and operator of the BeardMate store.</p>
+      <p>Owner and operator of BeardMate.</p>
       <dl>
-        <div><dt>Contact</dt><dd>Use the secure message form on this page.</dd></div>
-        {% if settings.support_phone != blank %}<div><dt>Phone</dt><dd><a href="tel:{{ settings.support_phone | remove: ' ' | remove: '(' | remove: ')' | remove: '-' }}">{{ settings.support_phone }}</a></dd></div>{% endif %}
         {% if settings.business_address != blank %}<div><dt>Business address</dt><dd><address>{{ settings.business_address | newline_to_br }}</address></dd></div>{% endif %}
+        {% if settings.support_phone != blank %}<div><dt>Phone</dt><dd><a href="tel:{{ settings.support_phone | remove: ' ' | remove: '(' | remove: ')' | remove: '-' }}">{{ settings.support_phone }}</a></dd></div>{% endif %}
+        <div><dt>Online contact</dt><dd>Use the secure message form on this page.</dd></div>
         <div><dt>Support hours</dt><dd>{{ section.settings.support_hours }}</dd></div>
         <div><dt>Response time</dt><dd>{{ section.settings.response_time }}</dd></div>
       </dl>
+      {% if request.design_mode and settings.business_address == blank or request.design_mode and settings.support_phone == blank %}
+        <p class="form-message form-message--error"><strong>Merchant verification setup:</strong> add the full public street address and support phone under Theme settings → Business information.</p>
+      {% endif %}
     </aside>
 
     <div class="contact-form-wrap">
