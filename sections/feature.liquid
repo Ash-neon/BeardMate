@@ -1,0 +1,21 @@
+<section class="feature-wave">
+  <div class="feature-content container">
+    <h2>{{ section.settings.feature_heading }}</h2>
+    <p>{{ section.settings.feature_subtext }}</p>
+    <p>{{ section.settings.feature_detail }}</p>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Feature block",
+  "settings": [
+    {"type": "text", "id": "feature_heading", "label": "Heading", "default": "Trim. Vacuum. Done."},
+    {"type": "textarea", "id": "feature_subtext", "label": "Subtext", "default": "Our advanced grooming system captures trimmed hairs as you shave, keeping your grooming routine clean and effortless."},
+    {"type": "textarea", "id": "feature_detail", "label": "Detail text", "default": "The built-in vacuum chamber pulls loose hair directly into the trimmer while you trim. No mess. No cleanup."}
+  ],
+  "presets": [
+    {"name": "Feature block", "category": "Homepage"}
+  ]
+}
+{% endschema %}

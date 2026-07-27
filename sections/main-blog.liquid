@@ -1,0 +1,30 @@
+<section class="store-page content-list-page">
+  <div class="container">
+    <div class="store-page__heading"><p class="reference-eyebrow">{{ 'blogs.general.eyebrow' | t }}</p><h1>{{ blog.title }}</h1></div>
+    {% paginate blog.articles by section.settings.articles_per_page %}
+      <div class="content-grid">
+        {% for article in blog.articles %}
+          <article class="content-card">
+            {% if article.image != blank %}<a class="content-card__media" href="{{ article.url }}">{{ article.image | image_url: width: 1000 | image_tag: widths: '400, 700, 1000', loading: 'lazy', alt: article.image.alt | default: article.title }}</a>{% endif %}
+            <p class="reference-eyebrow">{{ article.published_at | date: format: 'date' }}</p>
+            <h2><a href="{{ article.url }}">{{ article.title }}</a></h2>
+            <p>{{ article.excerpt_or_content | strip_html | truncatewords: 35 }}</p>
+            <a class="text-link" href="{{ article.url }}">{{ 'blogs.general.read_more' | t }}</a>
+          </article>
+        {% else %}
+          <div class="empty-state"><h2>{{ 'blogs.general.empty' | t }}</h2></div>
+        {% endfor %}
+      </div>
+      {{ paginate | default_pagination }}
+    {% endpaginate %}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Main blog",
+  "settings": [
+    {"type": "range", "id": "articles_per_page", "label": "Articles per page", "min": 4, "max": 24, "step": 4, "default": 12}
+  ]
+}
+{% endschema %}

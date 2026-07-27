@@ -1,0 +1,62 @@
+<section class="store-page cart-page" data-cart-page>
+  <div class="container">
+    <div class="store-page__heading">
+      <p class="reference-eyebrow">{{ 'cart.general.eyebrow' | t }}</p>
+      <h1>{{ 'cart.general.title' | t }}</h1>
+    </div>
+
+    {% if cart.empty? %}
+      <div class="empty-state">
+        <h2>{{ 'cart.general.empty' | t }}</h2>
+        <p>{{ 'cart.general.empty_text' | t }}</p>
+        <a class="reference-button" href="{{ routes.all_products_collection_url }}">{{ 'cart.general.continue_shopping' | t }}</a>
+      </div>
+    {% else %}
+      {% form 'cart', cart, id: 'CartForm', class: 'cart-layout' %}
+        <div class="cart-items">
+          {% for item in cart.items %}
+            <article class="cart-item">
+              <a class="cart-item__media" href="{{ item.url }}">
+                {% if item.image != blank %}{{ item.image | image_url: width: 360 | image_tag: widths: '180, 260, 360', loading: 'lazy', alt: item.image.alt | default: item.product.title }}{% endif %}
+              </a>
+              <div class="cart-item__content">
+                <h2><a href="{{ item.url }}">{{ item.product.title }}</a></h2>
+                {% unless item.product.has_only_default_variant %}<p>{{ item.variant.title }}</p>{% endunless %}
+                {% for property in item.properties %}
+                  {% assign property_first_character = property.first | slice: 0 %}
+                  {% if property.last != blank and property_first_character != '_' %}<p>{{ property.first }}: {{ property.last }}</p>{% endif %}
+                {% endfor %}
+                <p class="cart-item__price">{{ item.final_line_price | money }}</p>
+                <label for="CartQuantity-{{ forloop.index }}">{{ 'cart.general.quantity' | t }}</label>
+                <input id="CartQuantity-{{ forloop.index }}" type="number" name="updates[]" value="{{ item.quantity }}" min="0" inputmode="numeric">
+                <a class="text-link" href="{{ routes.cart_change_url }}?line={{ forloop.index }}&quantity=0">{{ 'cart.general.remove' | t }}</a>
+              </div>
+            </article>
+          {% endfor %}
+          <button class="btn" type="submit" name="update">{{ 'cart.general.update' | t }}</button>
+        </div>
+
+        <aside class="cart-summary">
+          <h2>{{ 'cart.general.summary' | t }}</h2>
+          <div class="cart-summary__row"><span>{{ 'cart.general.subtotal' | t }}</span><strong>{{ cart.total_price | money_with_currency }}</strong></div>
+          {% if cart.cart_level_discount_applications.size > 0 %}
+            {% for discount in cart.cart_level_discount_applications %}<p>{{ discount.title }}: −{{ discount.total_allocated_amount | money }}</p>{% endfor %}
+          {% endif %}
+          <p>{{ 'cart.general.taxes_shipping' | t }}</p>
+          <label for="CartNote">{{ 'cart.general.note' | t }}</label>
+          <textarea id="CartNote" name="note">{{ cart.note }}</textarea>
+          <button class="reference-button" type="submit" name="checkout">{{ 'cart.general.checkout' | t }}</button>
+          {% if additional_checkout_buttons %}<div class="additional-checkout-buttons">{{ content_for_additional_checkout_buttons }}</div>{% endif %}
+          <a class="text-link" href="{{ routes.all_products_collection_url }}">{{ 'cart.general.continue_shopping' | t }}</a>
+        </aside>
+      {% endform %}
+    {% endif %}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Main cart",
+  "settings": []
+}
+{% endschema %}

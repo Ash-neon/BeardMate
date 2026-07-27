@@ -1,0 +1,77 @@
+{% liquid
+  assign privacy_url = shop.privacy_policy.url | default: '/policies/privacy-policy'
+  assign refund_url = shop.refund_policy.url | default: '/policies/refund-policy'
+  assign shipping_url = shop.shipping_policy.url | default: '/policies/shipping-policy'
+  assign terms_url = shop.terms_of_service.url | default: '/policies/terms-of-service'
+  assign legal_name = settings.legal_business_name | default: 'ChaliseyZ Central L.L.C.'
+%}
+
+<footer class="site-footer">
+  <div class="container footer-main">
+    <div class="footer-brand">
+      <a class="brand brand--footer" href="{{ routes.root_url }}" aria-label="BeardMate home"><span class="brand__mark"><span>BEARD</span><strong>MATE</strong></span><small>by {{ legal_name }}</small></a>
+    </div>
+    <nav class="footer-column" aria-label="Footer navigation">
+      {% if section.settings.menu != blank %}
+        {% for link in section.settings.menu.links %}<a href="{{ link.url }}">{{ link.title }}</a>{% endfor %}
+      {% else %}
+        <a href="{{ routes.root_url }}">Home</a>
+        <a href="{{ routes.root_url }}#shop-now">Shop Now</a>
+        <a href="{{ routes.all_products_collection_url }}">The Collection</a>
+        <a href="{{ routes.search_url }}">Search</a>
+        {% if section.settings.tracking_url != blank %}<a href="{{ section.settings.tracking_url }}">Track Your Order</a>{% endif %}
+        <a href="{{ pages.contact.url | default: '/pages/contact' }}">Contact Us</a>
+      {% endif %}
+    </nav>
+    <div class="footer-about">
+      <h2>About BeardMate</h2>
+      <p>{{ section.settings.description }}</p>
+      <p class="footer-legal-entity">BeardMate is owned and operated by {{ legal_name }}.</p>
+      <a href="{{ pages.contact.url | default: '/pages/contact' }}">Contact customer care</a>
+      {% if settings.support_phone != blank %}<a href="tel:{{ settings.support_phone | remove: ' ' | remove: '(' | remove: ')' | remove: '-' }}">{{ settings.support_phone }}</a>{% endif %}
+      {% if settings.support_email != blank %}<a href="mailto:{{ settings.support_email | escape }}">{{ settings.support_email }}</a>{% endif %}
+      {% if settings.business_address != blank %}<address>{{ settings.business_address | newline_to_br }}</address>{% endif %}
+    </div>
+  </div>
+
+  <div class="container footer-utility">
+    <div class="footer-payments" aria-label="Accepted payment methods">
+      {% for type in shop.enabled_payment_types %}{{ type | payment_type_svg_tag }}{% endfor %}
+    </div>
+    <div class="footer-policy-links">
+      <span>© {{ 'now' | date: '%Y' }} {{ legal_name }}. All rights reserved.</span>
+      <a href="{{ privacy_url }}">Privacy policy</a>
+      <a href="{{ refund_url }}">Refund policy</a>
+      <a href="{{ shipping_url }}">Shipping policy</a>
+      <a href="{{ terms_url }}">Terms of use</a>
+      <a href="{{ pages.contact.url | default: '/pages/contact' }}">Contact information</a>
+    </div>
+  </div>
+
+  <div class="container footer-newsletter">
+    <div>
+      <h2>Subscribe To Our Emails</h2>
+      <p>Be the first to know about new collections and exclusive offers.</p>
+    </div>
+    {% form 'customer', class: 'newsletter-form' %}
+      <input type="hidden" name="contact[tags]" value="newsletter">
+      <label class="sr-only" for="FooterEmail-{{ section.id }}">Email address</label>
+      <input id="FooterEmail-{{ section.id }}" type="email" name="contact[email]" value="{{ form.email }}" placeholder="Email address" autocomplete="email" required>
+      <button type="submit" aria-label="Subscribe">→</button>
+      {% if form.posted_successfully? %}<p class="form-message" role="status">Thanks for subscribing.</p>{% endif %}
+      {% if form.errors %}<div class="form-message form-message--error" role="alert">{{ form.errors | default_errors }}</div>{% endif %}
+    {% endform %}
+  </div>
+</footer>
+
+{% schema %}
+{
+  "name": "Footer",
+  "settings": [
+    {"type": "link_list", "id": "menu", "label": "Footer menu"},
+    {"type": "textarea", "id": "description", "label": "Brand description", "default": "BeardMate provides modern grooming tools and beard care products designed to help men maintain a clean, sharp, and confident look every day."},
+    {"type": "url", "id": "tracking_url", "label": "Tracking page URL"}
+  ],
+  "presets": [{"name": "Footer"}]
+}
+{% endschema %}

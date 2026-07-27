@@ -1,0 +1,107 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "hero": {
+      "type": "hero",
+      "settings": {}
+    },
+    "product_info": {
+      "type": "product-info",
+      "settings": {}
+    },
+    "payment": {
+      "type": "payment-trust",
+      "settings": {}
+    },
+    "details": {
+      "type": "product-detail",
+      "settings": {}
+    },
+    "features": {
+      "type": "features-list",
+      "settings": {}
+    },
+    "testimonials": {
+      "type": "testimonials",
+      "settings": {}
+    },
+    "faq": {
+      "type": "faq",
+      "blocks": {
+        "faq_1": {
+          "type": "faq_item",
+          "settings": {
+            "question": "Does the vacuum actually collect hair?",
+            "answer": "Yes. The integrated vacuum pulls most trimmed hair into the built-in chamber while you groom."
+          }
+        },
+        "faq_2": {
+          "type": "faq_item",
+          "settings": {
+            "question": "Can it trim thick beards?",
+            "answer": "Yes. The high-torque motor and adjustable guide combs are designed for fine, thick, and coarse beard hair."
+          }
+        },
+        "faq_3": {
+          "type": "faq_item",
+          "settings": {
+            "question": "Is it rechargeable?",
+            "answer": "Yes. BeardMate is cordless and USB rechargeable for easy use at home or while traveling."
+          }
+        },
+        "faq_4": {
+          "type": "faq_item",
+          "settings": {
+            "question": "How long does the battery last?",
+            "answer": "Runtime depends on the selected product model and use. Refer to the specifications included with your BeardMate."
+          }
+        },
+        "faq_5": {
+          "type": "faq_item",
+          "settings": {
+            "question": "Is the trimmer suitable for sensitive skin?",
+            "answer": "The rounded guide combs and precision blades are designed for comfortable trimming. Avoid pressing hard and stop use if irritation occurs."
+          }
+        },
+        "faq_6": {
+          "type": "faq_item",
+          "settings": {
+            "question": "Is the trimmer waterproof?",
+            "answer": "The trimmer is water-resistant for easier cleaning. Follow the care instructions included with your exact model before rinsing."
+          }
+        }
+      },
+      "block_order": [
+        "faq_1",
+        "faq_2",
+        "faq_3",
+        "faq_4",
+        "faq_5",
+        "faq_6"
+      ],
+      "settings": {}
+    },
+    "related": {
+      "type": "related-products",
+      "settings": {}
+    }
+  },
+  "order": [
+    "hero",
+    "product_info",
+    "payment",
+    "details",
+    "features",
+    "testimonials",
+    "faq",
+    "related"
+  ]
+}

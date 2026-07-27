@@ -1,0 +1,26 @@
+{% doc %}
+  Renders a BeardMate product card.
+
+  @param {product} product - Product displayed in the card.
+  @param {boolean} [show_vendor] - Shows the product vendor when true.
+{% enddoc %}
+
+<article class="catalog-card">
+  <a class="catalog-card__media" href="{{ product.url }}">
+    {% if product.featured_image != blank %}
+      {{ product.featured_image | image_url: width: 900 | image_tag: widths: '320, 520, 720, 900', sizes: '(min-width: 900px) 25vw, 50vw', loading: 'lazy', alt: product.featured_image.alt | default: product.title }}
+    {% else %}
+      {{ 'product-1' | placeholder_svg_tag: 'catalog-card__placeholder' }}
+    {% endif %}
+    {% unless product.available %}<span class="catalog-card__badge">{{ 'products.product.sold_out' | t }}</span>{% endunless %}
+    {% if product.compare_at_price_max > product.price %}<span class="catalog-card__badge catalog-card__badge--sale">{{ 'products.product.sale' | t }}</span>{% endif %}
+  </a>
+  <div class="catalog-card__content">
+    {% if show_vendor %}<p class="catalog-card__vendor">{{ product.vendor }}</p>{% endif %}
+    <h2><a href="{{ product.url }}">{{ product.title }}</a></h2>
+    <p class="catalog-card__price">
+      {% if product.price_varies %}{{ 'products.product.from_price' | t: price: product.price_min | money }}{% else %}{{ product.price | money }}{% endif %}
+      {% if product.compare_at_price_max > product.price %}<s>{{ product.compare_at_price_max | money }}</s>{% endif %}
+    </p>
+  </div>
+</article>

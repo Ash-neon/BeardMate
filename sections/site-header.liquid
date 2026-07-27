@@ -1,0 +1,69 @@
+<div class="announcement" role="region" aria-label="Announcement">
+  <div class="announcement__track">
+    {% for index in (1..6) %}
+      <span>{{ section.settings.announcement }}</span>
+      <i aria-hidden="true">•</i>
+      <span>{{ section.settings.announcement_extra }}</span>
+      <i aria-hidden="true">•</i>
+    {% endfor %}
+  </div>
+</div>
+
+<header class="site-header" data-site-header>
+  <div class="container header-inner">
+    <a class="brand" href="{{ routes.root_url }}" aria-label="BeardMate home">
+      <span class="brand__mark">
+        {% if section.settings.logo != blank %}
+          {{ section.settings.logo | image_url: width: 440 | image_tag: widths: '180, 220, 320, 440', class: 'brand__image', alt: shop.name }}
+        {% else %}
+          <span>BEARD</span><strong>MATE</strong>
+        {% endif %}
+      </span>
+      <small>by {{ settings.legal_business_name | default: 'ChaliseyZ Central L.L.C.' }}</small>
+    </a>
+
+    <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="primaryNavigation" data-menu-toggle>
+      <span class="sr-only">Toggle menu</span>
+      <span></span><span></span><span></span>
+    </button>
+
+    <nav class="primary-nav" id="primaryNavigation" aria-label="Primary navigation" data-mobile-nav>
+      {% if section.settings.menu != blank %}
+        {% for link in section.settings.menu.links %}<a href="{{ link.url }}"{% if link.current %} aria-current="page"{% endif %}>{{ link.title }}</a>{% endfor %}
+      {% else %}
+        <a href="{{ routes.root_url }}"{% if request.page_type == 'index' %} aria-current="page"{% endif %}>Home</a>
+        <a href="{{ routes.root_url }}#shop-now">Shop Now</a>
+        <a href="{{ routes.all_products_collection_url }}">The Collection</a>
+        <a href="{{ pages.contact.url | default: '/pages/contact' }}">Contact Us</a>
+        {% if section.settings.tracking_url != blank %}<a href="{{ section.settings.tracking_url }}">Track Your Order</a>{% endif %}
+      {% endif %}
+    </nav>
+
+    <div class="header-actions">
+      <a class="header-icon" href="{{ routes.search_url }}" aria-label="Search">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.8" cy="10.8" r="6.8"/><path d="m16 16 5 5"/></svg>
+      </a>
+      <a class="header-icon" href="{{ routes.account_url }}" aria-label="Account">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="7" r="3.4"/><path d="M5.5 21v-2.8a6.5 6.5 0 0 1 13 0V21Z"/></svg>
+      </a>
+      <a class="header-icon header-cart" href="{{ routes.cart_url }}" aria-label="Cart with {{ cart.item_count }} items">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 8h12l-1 13H7L6 8Zm3 0V5a3 3 0 0 1 6 0v3"/></svg>
+        <span class="cart-count">{{ cart.item_count }}</span>
+      </a>
+    </div>
+  </div>
+</header>
+
+{% schema %}
+{
+  "name": "Site header",
+  "settings": [
+    {"type": "image_picker", "id": "logo", "label": "Logo"},
+    {"type": "link_list", "id": "menu", "label": "Main menu"},
+    {"type": "text", "id": "announcement", "label": "Announcement", "default": "Free Shipping"},
+    {"type": "text", "id": "announcement_extra", "label": "Second announcement", "default": "Customer Support Available"},
+    {"type": "url", "id": "tracking_url", "label": "Tracking page URL"}
+  ],
+  "presets": [{"name": "Site header"}]
+}
+{% endschema %}

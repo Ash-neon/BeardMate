@@ -1,0 +1,217 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "hero": {
+      "type": "homepage-hero",
+      "settings": {
+        "product": "",
+        "image": "shopify://shop_images/S912d4243463d48cca3bbf0cd6f7d0463j.jpg_960x960q75.avif",
+        "eyebrow": "BeardMate Vacuum Beard Trimmer",
+        "heading": "Trim Clean. Groom Smart.",
+        "text": "Meet the BeardMate vacuum beard trimmer, designed to capture trimmed hairs as you shave while delivering precise, professional beard styling at home.",
+        "benefit_1": "30-Day Money-Back Guarantee",
+        "benefit_2": "Tracked Shipping Available",
+        "button_label": "Shop BeardMate"
+      }
+    },
+    "ticker": {
+      "type": "homepage-ticker",
+      "blocks": {
+        "smart": {
+          "type": "item",
+          "settings": {
+            "text": "Smart Grooming"
+          }
+        },
+        "technology": {
+          "type": "item",
+          "settings": {
+            "text": "Technology"
+          }
+        },
+        "trim": {
+          "type": "item",
+          "settings": {
+            "text": "Trim"
+          }
+        },
+        "capture": {
+          "type": "item",
+          "settings": {
+            "text": "Capture"
+          }
+        },
+        "no_mess": {
+          "type": "item",
+          "settings": {
+            "text": "No Mess"
+          }
+        }
+      },
+      "block_order": [
+        "smart",
+        "technology",
+        "trim",
+        "capture",
+        "no_mess"
+      ],
+      "settings": {}
+    },
+    "story": {
+      "type": "homepage-story",
+      "settings": {
+        "product": "beardmate-2-in-1-beard-trimmer-with-built-in-vacuum",
+        "heading": "Finally, A Trimmer That Keeps The Sink Clean",
+        "image_1": "shopify://shop_images/71IwZKWTOEL._AC_SX466.jpg",
+        "title_1": "One trimmer. Every beard.",
+        "text_1": "Dial in your preferred length for clean stubble, sharp lines, or a fuller beard.",
+        "image_2": "shopify://shop_images/Gemini_Generated_Image_b20v4yb20v4yb20v.png",
+        "title_2": "Power that keeps up.",
+        "text_2": "A high-capacity battery, travel lock, and cordless design keep every trim easy.",
+        "image_3": "shopify://shop_images/717o-NM9UPL._AC_SL1500.jpg",
+        "title_3": "No more hair in your sink.",
+        "text_3": "The built-in vacuum chamber captures trimmed hair while you shave.",
+        "summary": "<p>Our advanced grooming system <strong>captures trimmed hairs as you shave</strong>, keeping your routine clean and effortless. No mess. No cleanup.</p>"
+      }
+    },
+    "reviews": {
+      "type": "homepage-reviews",
+      "settings": {
+        "heading": "Customer Reviews"
+      }
+    },
+    "features_list_pr6LkV": {
+      "type": "features-list",
+      "name": "Feature list",
+      "settings": {
+        "heading": "Why You’ll Love It",
+        "feature_1_title": "Mess-Free Grooming",
+        "feature_1_copy": "Keeps your sink and bathroom clean by collecting trimmed hairs while you shave.",
+        "feature_2_title": "Fast & Easy Grooming",
+        "feature_2_copy": "Trim your beard in minutes without extra cleanup afterward.",
+        "feature_3_title": "Waterproof Cleaning",
+        "feature_3_copy": "The water-resistant design makes rinsing and resetting easy after trimming.",
+        "feature_4_title": "Travel Friendly",
+        "feature_4_copy": "Rechargeable cordless design makes it easy to groom anywhere."
+      }
+    },
+    "featured_product": {
+      "type": "homepage-featured-product",
+      "settings": {
+        "product": "beardmate-2-in-1-beard-trimmer-with-built-in-vacuum",
+        "eyebrow": "BeardMate",
+        "fallback_title": "BeardMate 2-in-1 Beard Trimmer with Built In Vacuum",
+        "fallback_button": "Shop the collection"
+      }
+    },
+    "payment_trust_9p3jzj": {
+      "type": "payment-trust",
+      "name": "Payment and trust",
+      "settings": {
+        "payment_heading": "Checkout securely with",
+        "trust_badge_1": "Guaranteed",
+        "trust_badge_2": "Premium quality",
+        "trust_badge_3": "Fast shipping"
+      }
+    },
+    "product_info_gXxdM3": {
+      "type": "product-info",
+      "name": "Product information",
+      "settings": {
+        "detail_title": "Product Details",
+        "detail_content": "BeardMate delivers precision trimming with a built-in vacuum chamber to capture loose hairs while you groom. Includes styling combs, USB charging cable, and cleaning brush.",
+        "shipping_title": "Shipping & Delivery",
+        "shipping_content": "Orders are normally processed within 1–2 business days. Tracking is sent as soon as your BeardMate ships.",
+        "refund_title": "Return & Refund Policy",
+        "refund_content": "Contact us within 30 days of delivery to request a return under the BeardMate satisfaction guarantee."
+      }
+    },
+    "product_detail_XanCWp": {
+      "type": "product-detail",
+      "name": "Product detail",
+      "settings": {
+        "detail_image": "shopify://shop_images/Gemini_Generated_Image_vmz4rqvmz4rqvmz4.png",
+        "detail_eyebrow": "The BeardMate system",
+        "detail_heading": "Trim. Vacuum. Done.",
+        "detail_text": "Our advanced grooming system captures trimmed hairs as you shave, keeping your grooming routine clean and effortless. The built-in vacuum chamber pulls loose hair directly into the trimmer while you trim.",
+        "detail_bullet_1": "No mess",
+        "detail_bullet_2": "No cleanup",
+        "detail_bullet_3": "Professional results"
+      }
+    },
+    "collection": {
+      "type": "homepage-collection",
+      "settings": {
+        "collection": "",
+        "eyebrow": "The Collection",
+        "heading": "Complete Your Routine",
+        "link_label": "View all",
+        "product_limit": 4
+      }
+    },
+    "faq": {
+      "type": "homepage-faq",
+      "blocks": {
+        "faq_1": {
+          "type": "faq",
+          "settings": {
+            "question": "Does it really catch all the hair?",
+            "answer": "The built-in vacuum is designed to capture most trimmed hairs as you groom. A few strays can happen depending on technique and hair length, but cleanup is dramatically reduced."
+          }
+        },
+        "faq_2": {
+          "type": "faq",
+          "settings": {
+            "question": "What beard lengths can I trim?",
+            "answer": "The included guide combs cover everyday stubble through a fuller short beard. Use the bare blade for crisp cheek, neck, and mustache lines."
+          }
+        },
+        "faq_3": {
+          "type": "faq",
+          "settings": {
+            "question": "Can I rinse the whole trimmer?",
+            "answer": "The body is water-resistant for easy rinsing. Empty the chamber first, keep the charging port closed, and allow the trimmer to dry fully before charging."
+          }
+        },
+        "faq_4": {
+          "type": "faq",
+          "settings": {
+            "question": "What if BeardMate is not for me?",
+            "answer": "Contact us within 30 days of delivery. Our support team will walk you through the return process under the refund policy linked below."
+          }
+        }
+      },
+      "block_order": [
+        "faq_1",
+        "faq_2",
+        "faq_3",
+        "faq_4"
+      ],
+      "settings": {
+        "eyebrow": "Good to know",
+        "heading": "Questions Before You Trim?"
+      }
+    }
+  },
+  "order": [
+    "hero",
+    "ticker",
+    "story",
+    "reviews",
+    "features_list_pr6LkV",
+    "featured_product",
+    "payment_trust_9p3jzj",
+    "product_info_gXxdM3",
+    "product_detail_XanCWp",
+    "collection",
+    "faq"
+  ]
+}

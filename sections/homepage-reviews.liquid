@@ -1,0 +1,37 @@
+{% if section.blocks.size > 0 %}
+  <section class="reference-reviews" id="reviews">
+    <div class="container reference-reviews__inner">
+      <h2>{{ section.settings.heading }}</h2>
+      <div class="reference-review-grid">
+        {% for block in section.blocks %}
+          <article class="reference-review" {{ block.shopify_attributes }}>
+            <strong>{{ block.settings.name }}{% if block.settings.verified %} — Verified Buyer{% endif %}</strong>
+            <p>{{ block.settings.quote }}</p>
+            <div><em>{{ block.settings.detail }}</em> <span aria-label="{{ block.settings.rating }} out of 5 stars">{% for star in (1..block.settings.rating) %}★{% endfor %}</span></div>
+          </article>
+        {% endfor %}
+      </div>
+    </div>
+  </section>
+{% endif %}
+
+{% schema %}
+{
+  "name": "Homepage reviews",
+  "settings": [{"type": "text", "id": "heading", "label": "Heading", "default": "Customer Reviews"}],
+  "blocks": [
+    {
+      "type": "review",
+      "name": "Review",
+      "settings": [
+        {"type": "textarea", "id": "quote", "label": "Review text"},
+        {"type": "text", "id": "name", "label": "Customer name"},
+        {"type": "text", "id": "detail", "label": "Location or detail"},
+        {"type": "range", "id": "rating", "label": "Rating", "min": 1, "max": 5, "step": 1, "default": 5},
+        {"type": "checkbox", "id": "verified", "label": "Mark as verified buyer", "default": false}
+      ]
+    }
+  ],
+  "presets": [{"name": "Homepage reviews"}]
+}
+{% endschema %}

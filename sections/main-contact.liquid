@@ -1,0 +1,62 @@
+{% liquid
+  assign legal_name = settings.legal_business_name | default: 'ChaliseyZ Central L.L.C.'
+%}
+
+<section class="contact-hero">
+  <div class="container">
+    <p class="reference-eyebrow">BeardMate customer care</p>
+    <h1>Contact Us</h1>
+    <p>Questions about a product, order, delivery, or return? Contact the team at {{ legal_name }}.</p>
+  </div>
+</section>
+
+<section class="contact-section">
+  <div class="container contact-grid">
+    <aside class="business-contact-card">
+      <p class="reference-eyebrow">Business contact information</p>
+      <h2>{{ legal_name }}</h2>
+      <p>Owner and operator of BeardMate.</p>
+      <dl>
+        {% if settings.business_address != blank %}<div><dt>Business address</dt><dd><address>{{ settings.business_address | newline_to_br }}</address></dd></div>{% endif %}
+        {% if settings.support_phone != blank %}<div><dt>Phone</dt><dd><a href="tel:{{ settings.support_phone | remove: ' ' | remove: '(' | remove: ')' | remove: '-' }}">{{ settings.support_phone }}</a></dd></div>{% endif %}
+        {% if settings.support_email != blank %}<div><dt>Email</dt><dd><a href="mailto:{{ settings.support_email | escape }}">{{ settings.support_email }}</a></dd></div>{% endif %}
+        <div><dt>Online contact</dt><dd>Use the secure message form on this page.</dd></div>
+        <div><dt>Support hours</dt><dd>{{ section.settings.support_hours }}</dd></div>
+        <div><dt>Response time</dt><dd>{{ section.settings.response_time }}</dd></div>
+      </dl>
+      {% if request.design_mode and settings.business_address == blank or request.design_mode and settings.support_phone == blank or request.design_mode and settings.support_email == blank %}
+        <p class="form-message form-message--error"><strong>Merchant verification setup:</strong> add the full public street address, support phone, and support email under Theme settings → Business information.</p>
+      {% endif %}
+    </aside>
+
+    <div class="contact-form-wrap">
+      <h2>Send a message</h2>
+      {% form 'contact', class: 'contact-form' %}
+        {% if form.posted_successfully? %}<p class="contact-success" role="status">Thanks. We received your message and will respond as soon as possible.</p>{% endif %}
+        {% if form.errors %}<div class="contact-error" role="alert">{{ form.errors | default_errors }}</div>{% endif %}
+        <label for="ContactName-{{ section.id }}">Name</label>
+        <input id="ContactName-{{ section.id }}" type="text" name="contact[name]" value="{{ form.name }}" autocomplete="name" required>
+        <label for="ContactEmail-{{ section.id }}">Email</label>
+        <input id="ContactEmail-{{ section.id }}" type="email" name="contact[email]" value="{{ form.email }}" autocomplete="email" required>
+        <label for="ContactPhone-{{ section.id }}">Phone <span>(optional)</span></label>
+        <input id="ContactPhone-{{ section.id }}" type="tel" name="contact[phone]" value="{{ form.phone }}" autocomplete="tel">
+        <label for="ContactOrder-{{ section.id }}">Order number <span>(optional)</span></label>
+        <input id="ContactOrder-{{ section.id }}" type="text" name="contact[order_number]">
+        <label for="ContactMessage-{{ section.id }}">How can we help?</label>
+        <textarea id="ContactMessage-{{ section.id }}" name="contact[body]" rows="7" required>{{ form.body }}</textarea>
+        <button class="reference-button" type="submit">Send message</button>
+      {% endform %}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Contact page",
+  "settings": [
+    {"type": "text", "id": "support_hours", "label": "Support hours", "default": "Monday–Friday, 9:00 AM–5:00 PM Eastern Time"},
+    {"type": "text", "id": "response_time", "label": "Response time", "default": "Within 2 business days"}
+  ],
+  "presets": [{"name": "Contact page"}]
+}
+{% endschema %}

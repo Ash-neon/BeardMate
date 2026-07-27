@@ -1,0 +1,34 @@
+<section class="product-detail-showcase">
+  <div class="product-detail-ticker" aria-hidden="true"><span>Designed for Cleaner Counters</span><span>Built for Everyday Grooming</span><span>Smarter Grooming Technology</span></div>
+  <div class="container product-detail-showcase__inner">
+    <p class="reference-eyebrow">{{ section.settings.detail_eyebrow }}</p>
+    <h2>{{ section.settings.detail_heading }}</h2>
+    <div class="product-detail-showcase__media">
+      {% if section.settings.detail_image != blank %}
+        {{ section.settings.detail_image | image_url: width: 1800 | image_tag: widths: '700, 1000, 1400, 1800', loading: 'lazy', alt: section.settings.detail_heading }}
+      {% elsif product.images[1] != blank %}
+        {{ product.images[1] | image_url: width: 1800 | image_tag: widths: '700, 1000, 1400, 1800', loading: 'lazy', alt: section.settings.detail_heading }}
+      {% else %}
+        <img src="{{ 'product-detail.svg' | asset_url }}" alt="{{ section.settings.detail_heading }}" width="720" height="420" loading="lazy">
+      {% endif %}
+    </div>
+    <p class="product-detail-showcase__lead">{{ section.settings.detail_text }}</p>
+    <div class="detail-pill-row"><span>{{ section.settings.detail_bullet_1 }}</span><span>{{ section.settings.detail_bullet_2 }}</span><span>{{ section.settings.detail_bullet_3 }}</span></div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Product detail",
+  "settings": [
+    {"type": "image_picker", "id": "detail_image", "label": "Detail image"},
+    {"type": "text", "id": "detail_eyebrow", "label": "Eyebrow text", "default": "The BeardMate system"},
+    {"type": "text", "id": "detail_heading", "label": "Heading", "default": "Trim. Vacuum. Done."},
+    {"type": "textarea", "id": "detail_text", "label": "Text", "default": "Our advanced grooming system captures trimmed hairs as you shave, keeping your grooming routine clean and effortless. The built-in vacuum chamber pulls loose hair directly into the trimmer while you trim."},
+    {"type": "text", "id": "detail_bullet_1", "label": "Bullet 1", "default": "No mess"},
+    {"type": "text", "id": "detail_bullet_2", "label": "Bullet 2", "default": "No cleanup"},
+    {"type": "text", "id": "detail_bullet_3", "label": "Bullet 3", "default": "Professional results"}
+  ],
+  "presets": [{"name": "Product detail"}]
+}
+{% endschema %}

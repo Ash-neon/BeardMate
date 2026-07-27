@@ -1,0 +1,61 @@
+{% liquid
+  assign featured_product = section.settings.product
+  assign selected_variant = featured_product.selected_or_first_available_variant
+  assign product_media = section.settings.image
+  if product_media == blank
+    assign product_media = featured_product.featured_image
+  endif
+%}
+
+<section class="featured-product" id="featured-product">
+  <div class="container featured-product__grid">
+    <div class="featured-product__media">
+      {% if product_media != blank %}
+        {{ product_media | image_url: width: 1200, height: 1200, crop: 'center' | image_tag: widths: '360, 540, 720, 900, 1200', sizes: '(min-width: 900px) 520px, calc(100vw - 30px)', loading: 'lazy', alt: featured_product.title | default: section.settings.fallback_title }}
+      {% else %}
+        <img src="{{ 'hero-trimmer.svg' | asset_url }}" alt="{{ section.settings.fallback_title }}" width="760" height="560" loading="lazy">
+      {% endif %}
+    </div>
+    <div class="featured-product__copy">
+      <p class="reference-eyebrow">{{ section.settings.eyebrow }}</p>
+      <h2>{{ featured_product.title | default: section.settings.fallback_title }}</h2>
+      {% if featured_product != blank %}
+        <div class="featured-price">
+          {% if selected_variant.compare_at_price > selected_variant.price %}<span>{{ selected_variant.compare_at_price | money }}</span>{% endif %}
+          <strong>{{ selected_variant.price | money }}</strong>
+          {% if selected_variant.compare_at_price > selected_variant.price %}<small>{{ 'products.product.sale' | t }}</small>{% endif %}
+        </div>
+        {% form 'product', featured_product, class: 'featured-product-form', id: 'HomepageFeaturedProductForm' %}
+          {% unless featured_product.has_only_default_variant %}
+            <label for="HomepageVariant-{{ section.id }}">{{ 'products.product.variant' | t }}</label>
+            <select id="HomepageVariant-{{ section.id }}" name="id">
+              {% for variant in featured_product.variants %}<option value="{{ variant.id }}"{% if variant == selected_variant %} selected{% endif %}{% unless variant.available %} disabled{% endunless %}>{{ variant.title }} — {{ variant.price | money }}{% unless variant.available %} — {{ 'products.product.sold_out' | t }}{% endunless %}</option>{% endfor %}
+            </select>
+          {% else %}
+            <input type="hidden" name="id" value="{{ selected_variant.id }}">
+          {% endunless %}
+          <label for="HomepageQuantity-{{ section.id }}">{{ 'cart.general.quantity' | t }}</label>
+          <select id="HomepageQuantity-{{ section.id }}" name="quantity"><option value="1">1</option><option value="2">2</option><option value="3">3</option></select>
+          <button class="reference-button reference-button--outline" type="submit" name="add" {% unless selected_variant.available %}disabled{% endunless %}>{% if selected_variant.available %}{{ 'products.product.add_to_cart' | t }}{% else %}{{ 'products.product.sold_out' | t }}{% endif %}</button>
+          {{ form | payment_button }}
+        {% endform %}
+      {% else %}
+        <a class="reference-button" href="{{ routes.all_products_collection_url }}">{{ section.settings.fallback_button }}</a>
+      {% endif %}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Homepage featured product",
+  "settings": [
+    {"type": "product", "id": "product", "label": "Product"},
+    {"type": "image_picker", "id": "image", "label": "Image override"},
+    {"type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "BeardMate"},
+    {"type": "text", "id": "fallback_title", "label": "Fallback title", "default": "BeardMate 2-in-1 Beard Trimmer with Built In Vacuum"},
+    {"type": "text", "id": "fallback_button", "label": "Fallback button", "default": "Shop the collection"}
+  ],
+  "presets": [{"name": "Homepage featured product"}]
+}
+{% endschema %}

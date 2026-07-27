@@ -1,0 +1,41 @@
+{% liquid
+  assign featured_collection = section.settings.collection
+  assign collection_products = featured_collection.products
+  if featured_collection == blank
+    assign collection_products = collections.all.products
+  endif
+%}
+
+{% if collection_products != blank %}
+  <section class="routine-section" id="collection">
+    <div class="container">
+      <div class="routine-heading"><div><p class="reference-eyebrow">{{ section.settings.eyebrow }}</p><h2>{{ section.settings.heading }}</h2></div><a href="{{ featured_collection.url | default: routes.all_products_collection_url }}">{{ section.settings.link_label }} <span aria-hidden="true">→</span></a></div>
+      <div class="routine-grid">
+        {% for item in collection_products limit: section.settings.product_limit %}
+          <a class="routine-card" href="{{ item.url }}">
+            <div class="routine-card__image">
+              {% if item.featured_image != blank %}{{ item.featured_image | image_url: width: 700, height: 700, crop: 'center' | image_tag: widths: '280, 420, 560, 700', sizes: '(min-width: 900px) 300px, calc(100vw - 58px)', loading: 'lazy', alt: item.title }}{% else %}{{ 'product-1' | placeholder_svg_tag }}{% endif %}
+              {% if item.compare_at_price > item.price %}<span>{{ 'products.product.sale' | t }}</span>{% endif %}
+            </div>
+            <h3>{{ item.title }}</h3>
+            <p>{% if item.compare_at_price > item.price %}<s>{{ item.compare_at_price | money }}</s>{% endif %} {{ item.price | money }}</p>
+          </a>
+        {% endfor %}
+      </div>
+    </div>
+  </section>
+{% endif %}
+
+{% schema %}
+{
+  "name": "Homepage collection",
+  "settings": [
+    {"type": "collection", "id": "collection", "label": "Collection"},
+    {"type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "The Collection"},
+    {"type": "text", "id": "heading", "label": "Heading", "default": "Complete Your Routine"},
+    {"type": "text", "id": "link_label", "label": "Link label", "default": "View all"},
+    {"type": "range", "id": "product_limit", "label": "Products", "min": 2, "max": 8, "step": 1, "default": 4}
+  ],
+  "presets": [{"name": "Homepage collection"}]
+}
+{% endschema %}

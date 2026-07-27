@@ -1,0 +1,15 @@
+{
+  "current": {
+    "legal_business_name": "ChaliseyZ Central L.L.C.",
+    "business_address": "34 W Edward St\nIselin, NJ 08830\nUnited States",
+    "support_phone": "929-264-9187",
+    "support_email": "chaliseyzcentral@gmail.com"
+  },
+  "presets": {
+    "default": {
+      "name": "Default",
+      "sections": {}
+    }
+  },
+  "current_template": "index"
+}
